@@ -1,0 +1,25 @@
+<ion-header [translucent]="true" >
+  <ion-toolbar  color="primary">
+    <ion-title class="ion-text-center"> 
+      <img alt="logo" id="header_logo" height="40" float-left src="assets/images/logo.png">
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+ <div>
+  <h1 id="header" color="secondary">
+      Collaborately
+  </h1>
+  
+  <ion-buttons slot="primary">
+    <ion-button [routerLink]="['/auth/signup']" >
+      <ion-icon name="person-circle"></ion-icon> &nbsp; Sign Up
+    </ion-button>
+    <br>
+    <ion-button [routerLink]="['/auth/signin']">
+      <ion-icon name="log-in-outline"></ion-icon> &nbsp; Sign In
+    </ion-button>
+  </ion-buttons>
+
+</div>
+</ion-content>

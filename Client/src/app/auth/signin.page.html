@@ -1,0 +1,64 @@
+<ion-header [translucent]="true" >
+   
+    <ion-toolbar  color="primary">
+      
+      <ion-title class="ion-text-center"> 
+          <ion-grid fixed>
+            <ion-row>
+                <ion-col size="5">
+                  <div class="ion-text-start backBtn"  >
+                    <ion-icon name="arrow-undo-outline" [routerLink]="['/home']"></ion-icon>
+                  </div>
+                </ion-col>
+                <ion-col size="6">
+                  <div class="ion-text-start">
+                    <img alt="logo" id="header_logo" height="40" float-left src="assets/images/logo.png">
+                  </div>
+                </ion-col>
+              </ion-row>
+          </ion-grid>
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+<ion-content  class="ion-padding">
+    <ion-grid>
+        <ion-row>
+            <ion-col size="12" size-sm="6" offset-sm="3">
+                <ion-text color="secondary">
+                    <h1>Sign in to your account</h1>
+                  </ion-text>         
+                <hr>
+            </ion-col>
+        </ion-row>
+      
+        <ion-row color="tertiary">
+            <ion-col size-sm="6" offset-sm="3">
+                <ion-list>
+                    <ion-item>
+                        <ion-label class="required" position="floating">Username</ion-label>
+                        <ion-input type="text" placeholder="enter your user name..."></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label class="required" position="floating">Password</ion-label>
+                        <ion-input type="password" placeholder="enter your password..." type="password"></ion-input>
+                    </ion-item>
+                       
+                </ion-list>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col class="ion-text-center">
+                <ion-button color="secondary" [routerLink]="['/main']"><ion-icon name="log-in-outline"></ion-icon> &nbsp; Sign in</ion-button>
+            </ion-col>
+        </ion-row>
+        <ion-row  class="ion-margin-top">
+            <ion-col class="ion-text-center" >
+                <ion-text color="tertiary">
+                    Don't have an account? <div class="link-wrapper">
+                        <a class="link hover" [routerLink]="['/auth/signup']" >Sign up</a>
+                    </div>
+                </ion-text>           
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

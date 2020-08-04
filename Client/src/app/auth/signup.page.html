@@ -1,0 +1,127 @@
+<ion-header [translucent]="true" >
+    <ion-toolbar  color="primary">
+      <ion-title class="ion-text-center"> 
+        <ion-grid fixed>
+            <ion-row>
+                <ion-col size="5">
+                  <div class="ion-text-start backBtn"  >
+                    <ion-icon name="arrow-undo-outline" [routerLink]="['/home']"> </ion-icon>
+                  </div>
+                </ion-col>
+                <ion-col size="6">
+                  <div class="ion-text-start">
+                    <img alt="logo" id="header_logo" height="40" float-left src="assets/images/logo.png">
+                  </div>
+                </ion-col>
+              </ion-row>
+          </ion-grid>
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content appScrollbarTheme>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12" size-sm="10" offset-sm="1">
+          <ion-text color="secondary">
+            <h1>Sign up your account</h1>
+          </ion-text>
+          <hr />
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="12" size-sm="8" offset-sm="1">
+          <ion-list>
+            <ion-item>
+              <ion-label class="required" position="floating">Select the User Type</ion-label>
+              <ion-select
+                [(ngModel)]="selectedType"
+              >
+
+                <ion-select-option value="Guest">Guest</ion-select-option>
+                <ion-select-option value="Faculty">Faculty</ion-select-option>
+                <ion-select-option value="Store in-charge">Store in-charge</ion-select-option>
+            
+              </ion-select>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="12" size-sm="5" offset-sm="1">
+          <ion-list>
+            <ion-item>
+              <ion-label class="required" position="floating">Username</ion-label>
+              <ion-input type="text" placeholder="enter your username here..."></ion-input>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="12" size-sm="5" offset-sm="1">
+          <ion-list>
+            <ion-item>
+              <ion-label class="required" position="floating">First name</ion-label>
+              <ion-input type="text" placeholder="enter your first name..."></ion-input>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+        <ion-col size="12" size-sm="5">
+          <ion-list>
+            <ion-item>
+              <ion-label class="required" position="floating">Last name</ion-label>
+              <ion-input type="text" placeholder="enter your last name..."></ion-input>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="12" size-sm="5" offset-sm="1">
+          <ion-list>
+            <ion-item>
+              <ion-label class="required" position="floating">Position</ion-label>
+              <ion-input type="text" placeholder="enter your position..."></ion-input>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-margin-top">
+        <ion-col size="12" size-sm="5" offset-sm="1">
+          <ion-list>
+            <ion-item>
+              <ion-label class="required" position="floating">Password</ion-label>
+              <ion-input type="text" placeholder="enter at least 8 character password..."></ion-input>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="12" size-sm="5" offset-sm="1">
+          <ion-list>
+            <ion-item>
+              <ion-label class="required" position="floating">Password (again)</ion-label>
+              <ion-input type="text" placeholder="retype password..."></ion-input>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>  
+      <ion-row class="ion-margin-top">
+        <ion-col class="ion-text-center">
+          <ion-button color="secondary" [routerLink]="['/home']" (click)="clickFind()"
+            ><ion-icon name="person-circle"></ion-icon> &nbsp; Sign Up
+          </ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-margin-top">
+        <ion-col class="ion-text-center">
+          <ion-text color="tertiary">
+            Already have an account?
+            <div class="link-wrapper">
+              <a class="link hover" [routerLink]="['/auth/signin']">Sign in</a>
+            </div>
+          </ion-text>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-content>
+  
