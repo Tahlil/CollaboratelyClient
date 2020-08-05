@@ -20,6 +20,7 @@ em {
     justify-content: center;
     align-items: center;
     flex: 1;
+    background: white;
  }
  
  /* Sidebar */
@@ -143,6 +144,7 @@ em {
  @media (min-width: 68em) {
     .s-layout__content {
        margin-left: 15em;
+       
     }
     
     /* Sidebar */
