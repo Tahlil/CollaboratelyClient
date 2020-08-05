@@ -1,0 +1,20 @@
+ion-list-header{
+    font-size: 1.5rem;
+}
+
+ion-item > ion-label{
+   font-weight: bolder;
+}
+
+ion-col ion-img {
+    max-height: 100%;
+    max-width: 100%;
+    display: block;
+    margin: auto;
+  }
+
+  ion-button{
+      border: 1px solid var(--ion-color-primary);
+      border-radius: 1rem;
+      font-weight: bold;
+  }
