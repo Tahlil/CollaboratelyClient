@@ -18,17 +18,14 @@ ion-buttons{
 }
 
 ion-button{
-  font-size: 1.1rem;
-  border: black 3px solid;
-  padding: 3px;
-
+  font-size: 1.3rem;
+  border: 1px solid var(--ion-color-primary);
+  border-radius: 1rem;
+  font-weight: bold;
+  padding: 7px;
 }
 
-ion-button:hover{
-  border: teal 3px solid;
-  box-shadow: 1px 2px rgba($color: #000000, $alpha: 0.6);
-  color: rgb(23, 59, 59);
-}
+
 
 @media only screen and (max-width: 1290px) {
 
