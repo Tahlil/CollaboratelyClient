@@ -8,7 +8,7 @@ import { Router } from "@angular/router";
   styleUrls: ['./organization.page.scss'],
 })
 export class OrganizationPage implements OnInit {
-  orgType:String;
+  orgType:string;
   universities = [];
   nonEds = [];
 

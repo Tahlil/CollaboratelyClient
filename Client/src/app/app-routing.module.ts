@@ -18,6 +18,14 @@ const routes: Routes = [
     path: 'main',
     loadChildren: () => import('./main/main.module').then( m => m.MainPageModule)
   },
+  {
+    path: 'create-model',
+    loadChildren: () => import('./create-model/create-model.module').then( m => m.CreateModelPageModule)
+  },
+  {
+    path: 'reg-machine',
+    loadChildren: () => import('./reg-machine/reg-machine.module').then( m => m.RegMachinePageModule)
+  },
 
 ];
 
