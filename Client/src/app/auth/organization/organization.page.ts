@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { OrgService } from "../../services/org.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-organization',
@@ -6,11 +8,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./organization.page.scss'],
 })
 export class OrganizationPage implements OnInit {
-  org:String;
+  orgType:String;
   universities = [];
   nonEds = [];
-  constructor() {
-    this.org = "ed";
+
+  constructor(private orgService:OrgService, private router: Router) {
+    this.orgType = "ed";
     this.universities = [
       "University 1", "University 2"
     ];
@@ -24,7 +27,12 @@ export class OrganizationPage implements OnInit {
 
   radioGroupChange(event){
     console.log("radioGroupChange",event.detail.value);
-    this.org = event.detail.value;
+    this.orgType = event.detail.value;
+  }
+
+  goToAuth(authType){
+    this.orgService.current_orgType = this.orgType;
+    this.router.navigate(['/', 'auth', authType]);
   }
 
 }

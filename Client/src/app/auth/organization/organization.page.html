@@ -25,7 +25,7 @@
   <ion-grid fixed>
     <ion-row>
       <ion-col class="ion-text-center">
-        <ion-img style="width: 311px; height: 311px;"  [src]='"../../../assets/images/" + this.org + ".png"' ></ion-img>
+        <ion-img style="width: 311px; height: 311px;"  [src]='"../../../assets/images/" + this.orgType + ".png"' ></ion-img>
       </ion-col>
     </ion-row>
     <ion-row>
@@ -55,18 +55,18 @@
         <ion-list>
           <ion-list-header class="ion-text-center">
             <ion-label>
-              {{this.org === "ed" ? "Select from universities" : "Select from other organizations"}}
+              {{this.orgType === "ed" ? "Select from universities" : "Select from other organizations"}}
             </ion-label>
           </ion-list-header>
         
-          <ion-item *ngIf="this.org === 'ed'">
+          <ion-item *ngIf="this.orgType === 'ed'">
             <ion-label>Select University</ion-label>
             <ion-select [placeholder]="'Total universities: ' + this.universities.length" >
               <ion-select-option [value]="university" *ngFor="let university of this.universities">{{university}}</ion-select-option>
             </ion-select>
           </ion-item>
         
-          <ion-item *ngIf="this.org === 'ned'">
+          <ion-item *ngIf="this.orgType === 'ned'">
             <ion-label>Select Organization</ion-label>
             <ion-select [placeholder]="'Total organizations: ' + this.nonEds.length" >
               <ion-select-option [value]="nonEd" *ngFor="let nonEd of this.nonEds">{{nonEd}}</ion-select-option>
@@ -78,7 +78,7 @@
     </ion-row>
    <ion-row class="ion-align-items-center">
      <ion-col size="12" class="ion-text-center">
-      <ion-button [routerLink]="['/auth/signup']" >
+      <ion-button (click)="goToAuth('signup')" [routerLink]="['/auth/signup']" >
         <ion-icon name="person-circle"></ion-icon> &nbsp; Sign Up
       </ion-button>
         
@@ -87,7 +87,7 @@
        OR
      </ion-col>
      <ion-col size="12" class="ion-text-center">
-      <ion-button [routerLink]="['/auth/signin']">
+      <ion-button (click)="goToAuth('signin')">
         <ion-icon name="log-in-outline"></ion-icon> &nbsp; Sign In
       </ion-button> 
      </ion-col>

@@ -34,19 +34,24 @@
           <ion-list>
             <ion-item>
               <ion-label class="required" position="floating">Select the User Type</ion-label>
-              <ion-select
-                [(ngModel)]="selectedType"
-              >
+              <ion-select *ngIf="this.orgType === 'ed'"
+                [(ngModel)]="selectedType">
 
-                <ion-select-option value="Guest">Guest</ion-select-option>
-                <ion-select-option value="Faculty">Faculty</ion-select-option>
-                <ion-select-option value="Store in-charge">Store in-charge</ion-select-option>
+                <ion-select-option value="Student">Student</ion-select-option>
+                <ion-select-option value="Teacher">Teacher</ion-select-option>
+                <ion-select-option value="Alumni">Alumni</ion-select-option>
             
+              </ion-select>
+              <ion-select *ngIf="this.orgType === 'ned'"
+                [(ngModel)]="selectedType">
+                <ion-select-option value="Manager">Manager</ion-select-option>
+                <ion-select-option value="Developer">Developer</ion-select-option>   
               </ion-select>
             </ion-item>
           </ion-list>
         </ion-col>
       </ion-row>
+      
       <ion-row>
         <ion-col size="12" size-sm="5" offset-sm="1">
           <ion-list>
@@ -57,6 +62,7 @@
           </ion-list>
         </ion-col>
       </ion-row>
+
       <ion-row>
         <ion-col size="12" size-sm="5" offset-sm="1">
           <ion-list>
@@ -75,16 +81,26 @@
           </ion-list>
         </ion-col>
       </ion-row>
-      <ion-row>
+
+      <ion-row *ngIf="this.selectedType === 'Student' || this.selectedType === 'Alumni'">
         <ion-col size="12" size-sm="5" offset-sm="1">
           <ion-list>
             <ion-item>
-              <ion-label class="required" position="floating">Position</ion-label>
-              <ion-input type="text" placeholder="enter your position..."></ion-input>
+              <ion-label class="required" position="floating">University</ion-label>
+              <ion-input type="text" placeholder="enter your first name..."></ion-input>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+        <ion-col size="12" size-sm="5">
+          <ion-list>
+            <ion-item>
+              <ion-label class="required" position="floating">Session</ion-label>
+              <ion-input type="text" placeholder="enter your last name..."></ion-input>
             </ion-item>
           </ion-list>
         </ion-col>
       </ion-row>
+
       <ion-row class="ion-margin-top">
         <ion-col size="12" size-sm="5" offset-sm="1">
           <ion-list>

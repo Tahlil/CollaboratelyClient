@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Router } from "@angular/router";
-
-
+import { OrgService } from "../services/org.service";
 
 @Component({
   selector: 'app-auth',
@@ -10,10 +8,11 @@ import { Router } from "@angular/router";
   styleUrls: ['./auth.page.scss'],
 })
 export class SignUpPage implements OnInit {
-  selectedType:string;
-  
-  constructor(private router: Router) { 
-    this.selectedType = "";
+  selectedType:string ="";
+  orgType: string;
+
+  constructor(private orgService:OrgService,) { 
+    this.orgType = this.orgService.current_orgType;
   }
 
   ngOnInit() {
