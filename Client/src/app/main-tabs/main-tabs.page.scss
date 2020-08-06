@@ -8,18 +8,16 @@
  }
 @media (min-width: 42em) {
     #container{
-        margin-left: 4em;  
+        margin-left: 4em; 
+        padding-top: 0em; 
     }
  }
 
  @media (min-width: 68em) {
     #container{
-        margin-left: 15em;  
+        margin-left: 15em;
+        padding-top: 0em;  
     }
  }
- #container{
-    // margin-left: 15em;
-    color: red;
-}
- 
+
  

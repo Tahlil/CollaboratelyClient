@@ -26,7 +26,15 @@ const routes: Routes = [
   {
     path: 'reg-machine',
     loadChildren: () => import('./reg-machine/reg-machine.module').then( m => m.RegMachinePageModule)
+  },  {
+    path: 'manage-data',
+    loadChildren: () => import('./manage-data/manage-data.module').then( m => m.ManageDataPageModule)
+  },
+  {
+    path: 'manage-model',
+    loadChildren: () => import('./manage-model/manage-model.module').then( m => m.ManageModelPageModule)
   }
+
 
 ];
 

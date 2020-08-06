@@ -1,3 +1,29 @@
-<div id="container">
-  My tabs
-</div>
+
+
+  <super-tabs id="container">
+    <super-tabs-toolbar slot="top" color="secondary">
+      <super-tab-button>
+        <img src="../../assets/images/nn.svg" width="21px" height="21px" alt="" srcset="" style="float:left; margin-right: 5px;">
+        <ion-label>My models</ion-label>    
+      </super-tab-button>
+      <super-tab-button class="ion-text-center">
+        <img src="../../assets/images/data.svg" width="21px" height="21px" alt="" srcset="">
+        <ion-label>My data</ion-label>    
+      </super-tab-button>
+    
+    </super-tabs-toolbar>
+    <super-tabs-container>
+      <super-tab>
+        <ion-content>
+          <ion-nav animated="true" [root]="ManageModelPage" swipeGesture="true"></ion-nav>
+        </ion-content>
+      </super-tab>
+      <super-tab>
+        <ion-content>
+          <ion-nav animated="true" [root]="ManageDataPage" swipeGesture="true"></ion-nav>
+        </ion-content>
+      </super-tab>
+  
+    </super-tabs-container>
+  </super-tabs>
+
