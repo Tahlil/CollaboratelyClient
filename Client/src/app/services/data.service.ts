@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
-import { data } from "../models/data.model";
+import { Data } from "../models/data.model";
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
-  private datasets: data[] = []; 
+  private datasets: Data[] = []; 
 
   constructor() { }
 
   loadDatasets(){
-    
+
   }
 
   getDataset(){

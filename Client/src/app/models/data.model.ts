@@ -1,4 +1,4 @@
-export interface data {
+export interface Data {
     id: Number;
     fileName: string;
     columns: Array<Number>;

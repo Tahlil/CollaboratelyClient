@@ -13,8 +13,16 @@
    </ion-row>
    <ion-row>
     <ion-col size="11">
-      <hr class="hr-text" data-content="Model(s) List">
+      <hr class="hr-text" data-content="Model List">
     </ion-col>
+  </ion-row>
+  <ion-row style="padding-top: 11%; margin-right: 9%;"  *ngIf="this.models.length === 0">
+    <ion-col class="ion-text-center">
+      <ion-text color="light"> No Models Created Yet.</ion-text>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col *ngIf="this.models.length !== 0"></ion-col>
   </ion-row>
  </ion-grid>
 </ion-content>

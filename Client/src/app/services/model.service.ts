@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { nnModel } from "../models/nn.model";
+import { NN_Model } from "../models/nn.model";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ModelService {
-  private models: nnModel[] = []; 
+  private models: NN_Model[] = []; 
 
   constructor() { }
 

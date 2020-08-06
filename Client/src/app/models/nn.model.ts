@@ -1,4 +1,4 @@
-export interface nnModel {
+export interface NN_Model {
     id: Number;
     layers: Array<Number>;
     biases: Array<Number>;

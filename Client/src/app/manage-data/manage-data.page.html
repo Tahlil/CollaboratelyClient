@@ -14,7 +14,16 @@
       </ion-row>
       <ion-row>
         <ion-col size="11">
-          <hr class="hr-text" data-content="Dataset(s) List">
+          <hr class="hr-text" data-content="Dataset List">
+        </ion-col>
+      </ion-row>
+      <ion-row style="padding-top: 11%; margin-right: 9%;" *ngIf="this.datasets.length === 0" >
+        <ion-col class="ion-text-center">
+          <ion-text color="light"> No Dataset Uploaded Yet.</ion-text>
+        </ion-col>
+      </ion-row>
+      <ion-row>  
+        <ion-col *ngIf="this.datasets.length !== 0">
         </ion-col>
       </ion-row>
     </ion-grid>
