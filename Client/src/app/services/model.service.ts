@@ -10,7 +10,9 @@ export class ModelService {
   constructor() { }
 
   loadModels(){
-    
+    for (let num = 0; num < 10; num++) {
+      
+    }
   }
 
   getModels(){

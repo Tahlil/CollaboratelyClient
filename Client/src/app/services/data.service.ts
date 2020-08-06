@@ -10,7 +10,9 @@ export class DataService {
   constructor() { }
 
   loadDatasets(){
-
+    for (let num = 0; num < 10; num++) {
+      
+    }
   }
 
   getDataset(){
