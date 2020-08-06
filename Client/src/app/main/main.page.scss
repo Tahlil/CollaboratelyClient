@@ -14,13 +14,16 @@ em {
     width: 100%;
     min-height: 100vh;
  }
- 
+ .s-layout__sidebar{
+     z-index: 11;
+ }
  .s-layout__content {
     display: flex;
     justify-content: center;
     align-items: center;
     flex: 1;
     background: white;
+    z-index: 1;
  }
  
  /* Sidebar */
@@ -79,6 +82,7 @@ em {
 
  .s-sidebar__nav-link {
     position: relative;
+    cursor: pointer;
     display: inline-block;
     width: 100%;
     height: 4em;

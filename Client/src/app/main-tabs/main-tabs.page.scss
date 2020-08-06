@@ -1,0 +1,25 @@
+
+@media (min-width: 11em) {
+    #container{
+        margin-left: 0em; 
+        padding-top: 4em; 
+    }
+    
+ }
+@media (min-width: 42em) {
+    #container{
+        margin-left: 4em;  
+    }
+ }
+
+ @media (min-width: 68em) {
+    #container{
+        margin-left: 15em;  
+    }
+ }
+ #container{
+    // margin-left: 15em;
+    color: red;
+}
+ 
+ 

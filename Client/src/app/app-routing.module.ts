@@ -10,7 +10,8 @@ const routes: Routes = [
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
-  },  {
+  },
+  {
     path: 'auth',
     loadChildren: () => import('./auth/auth.module').then( m => m.AuthPageModule)
   },
@@ -25,7 +26,7 @@ const routes: Routes = [
   {
     path: 'reg-machine',
     loadChildren: () => import('./reg-machine/reg-machine.module').then( m => m.RegMachinePageModule)
-  },
+  }
 
 ];
 
