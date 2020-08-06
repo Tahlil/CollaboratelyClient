@@ -1,35 +1,17 @@
-<ion-header [translucent]="true" >
-  <ion-toolbar  color="primary">
-    <ion-title class="ion-text-center"> 
-      <ion-grid fixed>
-          <ion-row>
-              <ion-col size="5">
-                <div class="ion-text-start backBtn"  >
-                  <ion-button [routerLink]="['/home']">Logout </ion-button>
-                </div>
-              </ion-col>
-              <ion-col size="6">
-                <div class="ion-text-start">
-                  <img alt="logo" id="header_logo" height="40" float-left src="assets/images/logo.png">
-                </div>
-              </ion-col>
-            </ion-row>
-        </ion-grid>
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-<ion-grid fixed>
-  <ion-row>
-    <ion-col class="ion-justify-content">
-      <ion-button (click)="onClick()" color="success" fill="clear" shape="round">
-        Register your current machine
-      </ion-button>
+<ion-grid>
+  <ion-row id="head" style="padding-left: 7rem;">
+    <ion-col>
+      <ion-icon id="machine" name="laptop-outline"></ion-icon>
     </ion-col>
   </ion-row>
   <ion-row>
-    <ion-col size="12"></ion-col>
+    <ion-col class="ion-justify-content">
+      <ion-button (click)="verifyMachine()" color="success" fill="clear" shape="round">
+        Verify your current machine
+      </ion-button>
+    </ion-col>
   </ion-row>
+  
 </ion-grid>
 </ion-content>

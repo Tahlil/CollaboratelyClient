@@ -13,8 +13,8 @@
               <img alt="logo" id="header_logo" height="100" width="400" float-left src="assets/images/logo.png">
             </li>
             <li>
-               <a class="s-sidebar__nav-link" >
-                <ion-icon name="home"></ion-icon><em>Home</em>
+               <a class="s-sidebar__nav-link" [routerLink]="['/main']">
+                <ion-icon name="home" ></ion-icon><em>Home</em>
                </a>
             </li>
             <li>
@@ -33,7 +33,7 @@
               </a>
            </li>
            <li>
-            <a class="s-sidebar__nav-link">
+            <a class="s-sidebar__nav-link" [routerLink]="['/main/reg-machine']">
               <img alt="logo" height="23" width="29" src="assets/images/addMachine.svg"><em>Add your machine</em>
             </a>
          </li>
@@ -41,7 +41,12 @@
           <a class="s-sidebar__nav-link">
             <img alt="logo" height="23" width="29" src="assets/images/machine.png"><em>Update machine permission</em>
           </a>
-       </li>
+         </li>
+         <li>
+          <a class="s-sidebar__nav-link" [routerLink]="['/home']">
+            <ion-icon name="log-out"></ion-icon><em>Logout</em>
+          </a>
+         </li>
          </ul>
       </nav>
     </div>

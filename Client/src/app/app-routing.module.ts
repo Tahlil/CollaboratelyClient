@@ -24,9 +24,6 @@ const routes: Routes = [
     loadChildren: () => import('./create-model/create-model.module').then( m => m.CreateModelPageModule)
   },
   {
-    path: 'reg-machine',
-    loadChildren: () => import('./reg-machine/reg-machine.module').then( m => m.RegMachinePageModule)
-  },  {
     path: 'manage-data',
     loadChildren: () => import('./manage-data/manage-data.module').then( m => m.ManageDataPageModule)
   },

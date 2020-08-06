@@ -10,7 +10,11 @@ const routes: Routes = [
       { path: 'mini-tabs', loadChildren: () => import(`../main-tabs/main-tabs.module`).then(m => m.MainTabsPageModule) },
       {
         path: '', redirectTo: 'mini-tabs', pathMatch: 'full'
-      }
+      },
+      {
+        path: 'reg-machine',
+        loadChildren: () => import('../reg-machine/reg-machine.module').then( m => m.RegMachinePageModule)
+      },
     ]
   }
 
