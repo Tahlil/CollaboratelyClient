@@ -2,15 +2,153 @@
     font-size: 5rem;
 }
 
-#head{
-    margin-top: 11rem;
-}
+// #head{
+//     margin-top: 11rem;
+// }
 
 ion-button{
     border: 1px solid var(--ion-color-success);
     border-radius: 1rem;
 }
 
-ion-grid{
-    margin-left: 25%;
-}
+.fullheight {
+    height: 100%;
+  }
+  
+  .xc {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+ 
+
+  .table-wrapper {
+    width: 70%;
+    max-width: 1000px;
+    border: 3px solid #5d6d7e;
+    margin: 20px auto;
+    display: table;
+   
+  }
+  
+  .table {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    background: linear-gradient(45deg, #49a09d, #5f2c82);
+  }
+  
+
+
+  .table-spanner {
+    width: 100%;
+    background-color: #55608f;
+    display: flex;
+    font-size: 1.8em;
+    font-weight: normal;
+    margin: 0;
+    
+  }
+  .table-spanner span {
+    margin: auto;
+  }
+  
+  .thead {
+    display: table-header-group;
+    text-align: center;
+    font-size: 1.4em;
+  }
+  .thead .td {
+    background-color:  linear-gradient(45deg, #49a09d, #5f2c82);
+  }
+  
+  .tbody {
+    display: table-row-group;
+  }
+
+  
+  .tr {
+    display: table-row;
+    border-top: 1px solid #5d6d7e;
+  }
+  
+  .tr:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+  }
+
+  .td {
+    display: table-cell;
+    padding: 10px;
+    box-sizing: border-box;
+    vertical-align: middle;
+  }
+  
+  .td:nth-child(odd) {
+    border-right: 1px solid #5d6d7e;
+  }
+  
+  .thead, .table-spanner {
+    color: white;
+  }
+  
+  .td, .table-spanner {
+    height: 50px;
+    color: white;
+  }
+  
+  @media all and (min-width: 780px) {
+    .table-wrapper {
+      min-width: 700px;
+    }
+  }
+  @media all and (max-width: 779px) and (min-width: 480px) {
+    .table-wrapper {
+      min-width: 420px;
+    }
+  }
+  @media all and (max-width: 479px) {
+    .table-wrapper {
+      min-width: 300px;
+    }
+  
+    .table * {
+      display: block;
+    }
+  
+    .thead {
+      clip: rect(1px, 1px, 1px, 1px);
+      clip-path: inset(50%);
+      height: 1px;
+      width: 1px;
+      margin: -1px;
+      overflow: hidden;
+      position: absolute;
+      white-space: nowrap;
+    }
+  
+    .td::before {
+      display: inline-block;
+      content: attr(data);
+      width: 50%;
+      padding: 5px;
+      height: 95%;
+    }
+  
+    .td {
+      border-right: none !important;
+      border-top: 1px solid #5d6d7e;
+    }
+  
+    .tr {
+      border-top: none;
+    }
+  
+    .tr:nth-child(even) .td {
+      background-color: #99a3a4;
+      color: white;
+    }
+  }
+  
+  

@@ -1,17 +1,78 @@
 <ion-content>
-<ion-grid>
-  <ion-row id="head" style="padding-left: 7rem;">
-    <ion-col>
-      <ion-icon id="machine" name="laptop-outline"></ion-icon>
-    </ion-col>
-  </ion-row>
-  <ion-row>
-    <ion-col class="ion-justify-content">
-      <ion-button (click)="verifyMachine()" color="success" fill="clear" shape="round">
-        Verify your current machine
-      </ion-button>
-    </ion-col>
-  </ion-row>
-  
-</ion-grid>
+  <div *ngIf="!this.verifiedMachine"  class="fullheight xc">
+    <div>
+      <ion-row class="ion-text-center">
+        <ion-col size="12"> <ion-icon id="machine" name="laptop-outline"></ion-icon></ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="12">
+          <ion-button (click)="verifyMachine()" style="color: green; font-weight: bold;" fill="clear" shape="round">
+            Verify your current machine
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </div>
+  </div>
+
+  <!-- <div>
+   
+    </div>
+    <div>
+     
+    </div> -->
+
+    <div *ngIf="this.verifiedMachine"  class="fullheight xc">
+      <div>
+        <ion-row class="ion-text-center">
+          <ion-col size="12"> <ion-icon id="machine" name="laptop-outline"></ion-icon></ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="12">
+            <div class="table-wrapper">
+              <h1 class="table-spanner" id="table-header">
+                <span>CPU Details</span>
+              </h1>
+              <div class="table" role="table" aria-labelledby="table-header">
+                
+                <div class="tbody" role="rowgroup">
+                  <div class="tr" role="row" *ngFor="let item of this.getCPUInfo() | keyvalue">
+                    <div data="Roman Name" class="td" role="cell">{{item.key}}</div>
+                    <div data="Greek Name" class="td" role="cell">{{item.value}}</div>
+                  </div>      
+                </div>
+              </div>
+            </div>
+          </ion-col>
+        </ion-row>
+      
+        <ion-row>
+          <ion-col size="12">
+            <div class="table-wrapper">
+              <h1 class="table-spanner" id="table-header">
+                <span>GPU Details</span>
+              </h1>
+              <div class="table" role="table" aria-labelledby="table-header">         
+                <div class="tbody" role="rowgroup">
+                  <div class="tr" role="row" *ngFor="let item of this.getGPUInfo() | keyvalue">
+                    <div data="Roman Name" class="td" role="cell">{{item.key}}</div>
+                    <div data="Greek Name" class="td" role="cell">{{item.value}}</div>
+                  </div>      
+                </div>
+              </div>
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row class="ion-text-center">
+          <ion-col size="12">
+            <ion-button *ngIf="!this.machineRegistered" (click)="registerMachine()" style="color: green; font-weight: bold;" fill="clear" shape="round" [routerLink]="['/main']" routerLinkActive="router-link-active" >
+              Register current machine
+            </ion-button>
+            <ion-badge style="font-size: 1.5rem;" color="success" *ngIf="this.machineRegistered" >
+              Current machine registered.
+            </ion-badge>
+          </ion-col>
+        </ion-row>
+      </div>
+    </div>
+
 </ion-content>

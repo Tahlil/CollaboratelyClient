@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { HttpClient } from '@angular/common/http';
+
+import { MachineService } from "../services/machine.service";
 
 @Component({
   selector: 'app-reg-machine',
@@ -9,23 +10,32 @@ import { HttpClient } from '@angular/common/http';
 })
 export class RegMachinePage implements OnInit {
   deviceInfo;
-  constructor(private httpClient: HttpClient)  {
+  machineRegistered:boolean;
+  verifiedMachine:boolean;
+  constructor(private machineService:MachineService)  {
+    this.verifiedMachine = this.machineRegistered = this.machineService.machineRegistered;
+  }
+
+  async ngOnInit() {
     let that = this;
-    this.deviceInfo =  this.httpClient.get('http://localhost:3000/machine').subscribe(response => {
-      that.deviceInfo = response;
-      console.log("Device info: ");
-      console.log(that.deviceInfo);
-      
-    });
-    
   }
 
-   ngOnInit() {
-   
+   verifyMachine(){
+    console.log("Verify machine");
+    this.verifiedMachine = true; 
   }
 
-  verifyMachine(){
-    console.log();
+  getCPUInfo(){
+    return this.machineService.getCPUInfo();
+  }
+
+  getGPUInfo(){
+    return this.machineService.getGPUInfo(); 
+  }
+
+  registerMachine(){
+    this.machineRegistered = true;
+    this.machineService.machineRegistered = true;
   }
 
 }

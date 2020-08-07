@@ -188,5 +188,14 @@ em {
    font-size: 1.4em;
  }
 
- 
+ hr {
+   border: 1px solid var(--ion-color-primary) !important;
+   height: 3px !important;
+   width: 500px !important;
+   background: var(--ion-color-secondary) !important;
+   display: block !important;
+   font-size: 2em !important;
+   opacity: 1 !important;
+   visibility: visible !important;
+ }
  
