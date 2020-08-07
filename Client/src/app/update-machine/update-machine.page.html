@@ -1,9 +1,62 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>update-machine</ion-title>
-  </ion-toolbar>
-</ion-header>
 
 <ion-content>
+  <div *ngIf="!this.machineService.machineRegistered"  class="fullheight xc">
+    <div>
+      <ion-row class="ion-text-center">
+        <ion-col size="12">
+          <ion-img style="width:311px; height: 311px;" src="assets/images/machine.png"></ion-img>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-text-center">
+        <ion-col size="12">
+          <ion-badge color="success" style="font-weight: bold;" shape="round">
+          Machine is registered
+          </ion-badge>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-text-center">
+        <ion-col size="12" class="ion-text-center">
+          <ul class="tg-list">
+            <li class="tg-list-item">
+              <h4>Share your machine resource</h4>
+              <input (change) ="this.togglePermission()" [(ngModel)]="isChecked" class="tgl tgl-light" id="cb1" type="checkbox"/>
+              <label class="tgl-btn" for="cb1"></label>
+            </li>
+            
+          </ul>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-text-center ion-margin-top">
+        <ion-col size="12" class="ion-text-center">
+          <ion-text class="info" *ngIf="this.isChecked" color="warning"><ion-icon name="share-outline"></ion-icon> &nbsp; Permission given</ion-text>
+          <ion-text class="info" *ngIf="!this.isChecked" color="danger"><ion-icon name="lock-closed-outline"></ion-icon> &nbsp; Permission restricted</ion-text>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-text-center ion-margin-top">
+        <ion-col size="12">
+          <ion-button (click)="onClick()" color="danger" id="del" expand="block" fill="clear" shape="round">
+            Unregister current machine ⌫
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </div>
+  </div>
 
+  
+
+
+  <div *ngIf="this.machineService.machineRegistered"  class="fullheight xc">
+    <div>
+      <ion-row class="ion-text-center">
+       <h1>Your machine is not registered</h1>
+      </ion-row>
+      <ion-row>
+        <ion-col size="12">
+          <ion-button [routerLink]="['/main/reg-machine']" routerLinkActive="router-link-active"  style="color: green; font-weight: bold; border: 1px solid green;" fill="clear" shape="round">
+            Verify your current machine
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </div>
+  </div>
 </ion-content>
