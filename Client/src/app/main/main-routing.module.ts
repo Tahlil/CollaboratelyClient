@@ -15,6 +15,10 @@ const routes: Routes = [
         path: 'reg-machine',
         loadChildren: () => import('../reg-machine/reg-machine.module').then( m => m.RegMachinePageModule)
       },
+      {
+        path: 'update-machine',
+        loadChildren: () => import('../update-machine/update-machine.module').then( m => m.UpdateMachinePageModule)
+      }
     ]
   }
 

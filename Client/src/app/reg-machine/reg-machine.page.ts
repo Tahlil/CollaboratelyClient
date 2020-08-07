@@ -13,11 +13,11 @@ export class RegMachinePage implements OnInit {
   machineRegistered:boolean;
   verifiedMachine:boolean;
   constructor(private machineService:MachineService)  {
-    this.verifiedMachine = this.machineRegistered = this.machineService.machineRegistered;
+    
   }
 
   async ngOnInit() {
-    let that = this;
+    this.verifiedMachine = this.machineRegistered = this.machineService.machineRegistered;
   }
 
    verifyMachine(){

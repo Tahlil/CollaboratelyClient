@@ -9,7 +9,9 @@
     <ion-grid>
       <ion-row>
         <ion-col size="6" >
-          <button class="btn third" [routerLink]="['/main/reg-machine']"> <ion-icon slot="start" name="add"></ion-icon> &nbsp; <span>Add machine</span> </button>         
+          <button *ngIf="!this.machineRegistered()" class="btn third" [routerLink]="['/main/reg-machine']"> <ion-icon slot="start" name="add"></ion-icon> &nbsp; <span>Add machine</span> </button>         
+          <button *ngIf="this.machineRegistered()" class="btn third" [routerLink]="['/main/update-machine']"> <span>Update machine permission</span> </button>         
+          
         </ion-col>
         <ion-col size="6">  
           <button class="btn third"> <ion-icon slot="start" name="add"></ion-icon> &nbsp; <span>Add Data</span> </button>

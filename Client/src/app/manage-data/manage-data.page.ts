@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from "../services/data.service";
 import { Data } from "../models/data.model";
+import { MachineService } from "../services/machine.service";
 @Component({
   selector: 'app-manage-data',
   templateUrl: './manage-data.page.html',
@@ -9,11 +10,14 @@ import { Data } from "../models/data.model";
 export class ManageDataPage implements OnInit {
   datasets:Data[];
 
-  constructor(private dataService:DataService) { 
+  constructor(private dataService:DataService, private machineService:MachineService) { 
     this.datasets = this.dataService.getDataset();
   }
 
   ngOnInit() {
   }
 
+  machineRegistered(){
+    return this.machineService.machineRegistered;
+  }
 }
