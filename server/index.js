@@ -2,7 +2,6 @@ const si = require('systeminformation');
 let machineData = {}
 const express = require('express');
 const app = express();
-
 app.set('port', process.env.port || 3000) 
 
 
@@ -35,6 +34,8 @@ async function getCPUAndGPUData() {
             machineData.gpu['model'].push(gpu);
         }
         app.get('/machine', (req, res, next) =>{
+            res.header("Access-Control-Allow-Origin", "*");
+            res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
             res.send(machineData);
         })
     } catch (e) {
