@@ -18,6 +18,14 @@ const routes: Routes = [
       {
         path: 'update-machine',
         loadChildren: () => import('../update-machine/update-machine.module').then( m => m.UpdateMachinePageModule)
+      },
+      {
+        path: 'create-model',
+        loadChildren: () => import('../create-model/create-model.module').then( m => m.CreateModelPageModule)
+      },
+      {
+        path: 'upload-data',
+        loadChildren: () => import('../upload-data/upload-data.module').then( m => m.UploadDataPageModule)
       }
     ]
   }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { NN_Model } from "../models/nn.model";
-
+import { HelperService } from "./helper.service";
 
 @Injectable({
   providedIn: 'root'
@@ -12,46 +12,41 @@ export class ModelService {
   activationFunctions:Array<string> = ["Linear", "Relu", "Leaky Relu", "Sigmoid", "Softmax", "Tanh", "Swish"];
   trainingMethods:Array<string> = ["Batch Gradient Descent", "Mini Batch Gradient Descent", "Stochastic Gradient Descent"]
 
-  constructor() {
+  constructor(private helper:HelperService) {
     this.id=0;
   }
 
-  getRandomInt(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
-  }
+  
 
-  private getRandomnumberOfLayers():Array<number>{
-    let numberOfLayers = this.getRandomInt(5,11), layers= [];
+  private getRandomNumberOfLayers():Array<number>{
+    let numberOfLayers = this.helper.getRandomInt(5,11), layers= [];
     for (let layer = 0; layer < numberOfLayers; layer++) {
-      layers.push(this.getRandomInt(1,11));
+      layers.push(this.helper.getRandomInt(1,11));
     }
     return layers;
   }
 
-  private getRandomFloat(min, max) {
-    return Math.random() * (max - min) + min;
-  }
+
 
   generateRandomModel(numberOfFeatures: number): NN_Model{
-    let layers = this.getRandomnumberOfLayers(), activationFunctions = [];
+    let layers = this.getRandomNumberOfLayers(), activationFunctions = [];
     
     for (let i=0; i<layers.length; i++) {
-      activationFunctions.push(this.activationFunctions[this.getRandomInt(1, this.activationFunctions.length)])
+      activationFunctions.push(this.activationFunctions[this.helper.getRandomInt(0, this.activationFunctions.length)])
     }
     const model: NN_Model = {
       id: this.getLatestID(),
       isEncrypted: Math.random() < 0.5 ? true : false,
       isTrained: false,
       optimizers: [],
-      trainingMethod: this.trainingMethods[this.getRandomInt(1, this.trainingMethods.length)],
+      trainingMethod: this.trainingMethods[this.helper.getRandomInt(0, this.trainingMethods.length)],
       layers: [numberOfFeatures, ...layers],
       biases: [],
       weights: [],
       activations: activationFunctions,
-      regularization: this.regularizationOptions[this.getRandomInt(1,4)],
-      learningRate: Math.random()
+      regularization: this.regularizationOptions[this.helper.getRandomInt(1,4)],
+      learningRate: Math.random(),
+      epochs: this.helper.getRandomInt(1000, 10000)
     };
     return model;
   }
@@ -61,7 +56,7 @@ export class ModelService {
     for (let i = 0; i < layers.length; i++) {
       const currentLayer = layers[i], currentWeights = [], currentBiases =[];
       for (let j = 0; j < currentLayer; j++) {
-        currentBiases.push(this.getRandomFloat(1,11));
+        currentBiases.push(this.helper.getRandomFloat(1,11));
         currentWeights.push(Math.random())
       }
       weights.push(currentWeights);
@@ -79,7 +74,7 @@ export class ModelService {
 
   loadModels(){
     for (let num = 0; num < 10; num++) {
-      this.models.push(this.generateRandomModel(this.getRandomInt(3,11)))
+      this.models.push(this.generateRandomModel(this.helper.getRandomInt(3,11)))
     }
   }
 

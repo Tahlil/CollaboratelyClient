@@ -12,6 +12,10 @@ export class ManageDataPage implements OnInit {
 
   constructor(private dataService:DataService, private machineService:MachineService) { 
     this.datasets = this.dataService.getDataset();
+    console.log("Dataset: ");
+    
+    console.log(this.datasets);
+    
   }
 
   ngOnInit() {

@@ -1,6 +1,6 @@
 
 <ion-content>
-  <div *ngIf="!this.machineService.machineRegistered"  class="fullheight xc">
+  <div *ngIf="this.machineService.machineRegistered"  class="fullheight xc">
     <div>
       <ion-row class="ion-text-center">
         <ion-col size="12">
@@ -45,7 +45,7 @@
   
 
 
-  <div *ngIf="this.machineService.machineRegistered"  class="fullheight xc">
+  <div *ngIf="!this.machineService.machineRegistered" class="fullheight xc">
     <div>
       <ion-row class="ion-text-center">
        <h1>Your machine is not registered</h1>

@@ -10,4 +10,5 @@ export interface NN_Model {
     activations: Array<string>;
     regularization: string;
     learningRate: number;
+    epochs: number;
 }

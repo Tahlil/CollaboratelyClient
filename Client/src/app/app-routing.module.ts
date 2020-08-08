@@ -19,10 +19,7 @@ const routes: Routes = [
     path: 'main',
     loadChildren: () => import('./main/main.module').then( m => m.MainPageModule)
   },
-  {
-    path: 'create-model',
-    loadChildren: () => import('./create-model/create-model.module').then( m => m.CreateModelPageModule)
-  },
+ 
   {
     path: 'manage-data',
     loadChildren: () => import('./manage-data/manage-data.module').then( m => m.ManageDataPageModule)
@@ -31,6 +28,7 @@ const routes: Routes = [
     path: 'manage-model',
     loadChildren: () => import('./manage-model/manage-model.module').then( m => m.ManageModelPageModule)
   }
+
 
 
 

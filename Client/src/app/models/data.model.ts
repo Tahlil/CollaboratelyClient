@@ -1,9 +1,11 @@
 export interface Data {
-    id: Number;
+    id: number;
     fileName: string;
+    fileType: string;
     datasetName: string;
     description: string;
-    columns: Array<Number>;
+    columns: Array<string>;
     columnTypes: Array<string>;
     numberOfRow: string;
+    isEncrypted: boolean;
 }
