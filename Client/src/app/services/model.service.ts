@@ -16,8 +16,6 @@ export class ModelService {
     this.id=0;
   }
 
-  
-
   private getRandomNumberOfLayers():Array<number>{
     let numberOfLayers = this.helper.getRandomInt(5,11), layers= [];
     for (let layer = 0; layer < numberOfLayers; layer++) {
@@ -26,25 +24,23 @@ export class ModelService {
     return layers;
   }
 
-
-
   generateRandomModel(numberOfFeatures: number): NN_Model{
     let layers = this.getRandomNumberOfLayers(), activationFunctions = [];
-    
     for (let i=0; i<layers.length; i++) {
       activationFunctions.push(this.activationFunctions[this.helper.getRandomInt(0, this.activationFunctions.length)])
     }
     const model: NN_Model = {
       id: this.getLatestID(),
       isEncrypted: Math.random() < 0.5 ? true : false,
+      modelName: this.helper.generateRandomWord(),
       isTrained: false,
-      optimizers: [],
+      optimizers: "none",
       trainingMethod: this.trainingMethods[this.helper.getRandomInt(0, this.trainingMethods.length)],
       layers: [numberOfFeatures, ...layers],
       biases: [],
       weights: [],
       activations: activationFunctions,
-      regularization: this.regularizationOptions[this.helper.getRandomInt(1,4)],
+      regularization: this.regularizationOptions[this.helper.getRandomInt(0,3)],
       learningRate: Math.random(),
       epochs: this.helper.getRandomInt(1000, 10000)
     };

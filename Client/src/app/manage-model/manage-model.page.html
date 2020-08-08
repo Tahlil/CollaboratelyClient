@@ -26,8 +26,45 @@
       <ion-text color="light"> No Models Created Yet.</ion-text>
     </ion-col>
   </ion-row>
-  <ion-row>
-    <ion-col *ngIf="this.models.length !== 0"></ion-col>
+  <ion-row *ngIf="this.models.length !== 0" id="model">
+
+    <ion-col size="12" *ngFor="let item of this.models">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-subtitle>Model ID: <span class="font-bold">{{item.id}}</span></ion-card-subtitle>
+          <ion-card-title><span style="color: gray;">Name:</span> {{item.modelName}}</ion-card-title>
+        </ion-card-header>
+      
+        <ion-card-content style="padding-right: 3rem;">
+          <h1>Model Details:</h1>
+          Number of epochs: <span class="font-bold">{{item.epochs}}</span> <br>
+          Learning rate: <span class="font-bold">{{item.learningRate}}</span> <br>
+          Number of layers: <span class="font-bold">{{item.layers.length}}</span> <br>
+          Nodes in Input layer: <span class="font-bold"> {{item.layers[0]}}</span> <br>
+          Nodes in Hidden layers: <span class="font-bold"> {{item.layers.slice(1, item.layers.length).join(' - ')}}</span> <br>
+          Nodes in Output layer: <span class="font-bold"> {{item.layers[item.layers.length-1]}}</span> <br>
+          Regularization: <span class="font-bold">{{item.regularization}}</span> <br>
+          Activation functions: <span class="font-bold">{{item.activations.join(' - ')}}</span> <br>
+          <hr>
+          <ion-text color="primary">
+            <h3>Permission: </h3>
+          </ion-text>
+          <ion-text *ngIf="!item.isEncrypted" color="success">
+           <h1><ion-icon name="lock-open"></ion-icon> Public </h1>
+          </ion-text>
+          <ion-text *ngIf="item.isEncrypted" color="danger">
+            <h1><ion-icon name="lock-closed"></ion-icon> Private </h1>
+          </ion-text>
+          <hr>
+          <ion-text *ngIf="item.isTrained" color="success">
+            <h1> <img src="assets/images/trained.svg" width="41px" height="31px" alt="" srcset=""> Model is Trained </h1>
+          </ion-text>
+          <ion-text *ngIf="!item.isTrained" color="warning">
+            <h1> <img src="assets/images/notTrained.svg" width="41px" height="31px" alt="" srcset=""> Model not trained yet </h1>
+          </ion-text>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
   </ion-row>
  </ion-grid>
 </ion-content>

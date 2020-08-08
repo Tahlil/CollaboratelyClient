@@ -13,7 +13,8 @@ export class ManageModelPage implements OnInit {
   models:NN_Model[];
 
   constructor(private nnModelService:ModelService, private machineService:MachineService) {
-    this.models = this.nnModelService.getModels();
+     this.nnModelService.loadModels();
+     this.models = this.nnModelService.getModels();
    }
 
   ngOnInit() {
