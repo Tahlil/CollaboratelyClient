@@ -1,3 +1,7 @@
+ion-content{
+    padding: 0;
+    margin:0 ;
+}
 text {
     pointer-events: none;
   }
@@ -16,7 +20,10 @@ text {
   figure{
     min-width: 14em;
     overflow: auto;
-    
+    padding-right: 0 !important;
+    margin-top: 3.3rem;
+    // height: 100%;
+    padding-bottom: 3rem;
   }
 
   figure::-webkit-scrollbar-track
@@ -44,20 +51,14 @@ text {
                                                   transparent)
     }
 
-.slider-container {
-    width: 50vw;
-    min-width: 400px;
-    margin: auto;
-}
-
 
 .button:focus {
     outline: 0;
 }
 
-@media (min-width: 11em) {
+@media (max-width: 17em) {
     #bar{
-        margin-left: 0em; 
+        margin-left: 0em !important; 
         padding-top: 4em; 
     }
     
