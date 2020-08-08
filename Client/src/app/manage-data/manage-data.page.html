@@ -27,8 +27,28 @@
           <ion-text color="light"> No Dataset Uploaded Yet.</ion-text>
         </ion-col>
       </ion-row>
-      <ion-row>  
-        <ion-col *ngIf="this.datasets.length !== 0">
+      <ion-row *ngIf="this.datasets.length !== 0" id="data">  
+        <ion-col size="12" *ngFor="let item of this.datasets">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-subtitle>ID: <span class="font-bold">{{item.id}}</span></ion-card-subtitle>
+              <ion-card-title><span style="color: gray;">Name:</span> {{item.datasetName}}</ion-card-title>
+            </ion-card-header>
+          
+            <ion-card-content style="padding-right: 3rem;">
+              <h1>Details of Dataset:</h1>
+              File Name: <span class="font-bold">{{item.fileName}}.{{item.fileType}}</span> <br>
+              Number of rows: <span class="font-bold">{{item.numberOfRow}}</span> <br>
+              Number of columns: <span class="font-bold">{{item.columns.length}}</span> <br>
+              Columns: <span class="font-bold"> {{item.columns.join()}}</span> <br>
+              <ion-text color="secondary">
+                <h2>Descriptions</h2>
+              </ion-text>
+              <p >
+                {{item.description}}
+              </p>
+            </ion-card-content>
+          </ion-card>
         </ion-col>
       </ion-row>
     </ion-grid>

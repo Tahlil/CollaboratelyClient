@@ -11,7 +11,7 @@ export class ManageDataPage implements OnInit {
   datasets:Data[];
 
   constructor(private dataService:DataService, private machineService:MachineService) { 
-    this.datasets = this.dataService.getDataset();
+    this.datasets = this.dataService.loadDatasets();
     console.log("Dataset: ");
     
     console.log(this.datasets);

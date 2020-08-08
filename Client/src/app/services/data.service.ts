@@ -22,8 +22,8 @@ export class DataService {
   }
 
   loadDatasets(){
-    let numberOfColumns = this.helper.getRandomInt(3, 11);
     for (let i = 0; i < 5; i++) {
+      let numberOfColumns = this.helper.getRandomInt(3, 11);
       this.datasets.push(
         {
           id: i,
@@ -34,7 +34,7 @@ export class DataService {
           columns: this.helper.getListOfWords(numberOfColumns),
           columnTypes: this.getRandomTypes(numberOfColumns),
           numberOfRow: this.helper.getRandomInt(10, 10000),
-          isEncrypted: false
+          isPrivate: false
         }
       );   
     }    

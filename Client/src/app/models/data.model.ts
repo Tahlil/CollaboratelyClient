@@ -7,5 +7,5 @@ export interface Data {
     columns: Array<string>;
     columnTypes: Array<string>;
     numberOfRow: string;
-    isEncrypted: boolean;
+    isPrivate: boolean;
 }
