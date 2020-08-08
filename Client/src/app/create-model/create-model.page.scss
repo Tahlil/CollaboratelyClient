@@ -1,0 +1,46 @@
+text {
+    pointer-events: none;
+  }
+  
+  .node:hover {
+    stroke: #999;
+    stroke-opacity: .6;
+    stroke-width: 4px;
+  }
+  
+  .link {
+    stroke: #999;
+    stroke-opacity: .6;
+  }
+
+.slider-container {
+    width: 50vw;
+    min-width: 400px;
+    margin: auto;
+}
+
+
+.button:focus {
+    outline: 0;
+}
+
+@media (min-width: 11em) {
+    #bar{
+        margin-left: 0em; 
+        padding-top: 4em; 
+    }
+    
+ }
+@media (min-width: 42em) {
+    #bar{
+        margin-left: 4em; 
+        padding-top: 0em; 
+    }
+ }
+
+ @media (min-width: 68em) {
+    #bar{
+        margin-left: 15em;
+        padding-top: 0em;  
+    }
+ }

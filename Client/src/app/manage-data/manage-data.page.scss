@@ -126,3 +126,8 @@ ion-icon {
             transform:skew(8deg) rotate(3deg);
   }  
  }
+
+ ion-button{
+  border: 1px solid var(--ion-color-primary);
+  border-radius: 1rem;
+ }
