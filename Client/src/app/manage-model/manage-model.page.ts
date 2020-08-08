@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModelService } from "../services/model.service";
 import { NN_Model } from "../models/nn.model";
 import { MachineService } from "../services/machine.service";
-import { ThrowStmt } from '@angular/compiler';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-manage-model',
@@ -12,7 +12,7 @@ import { ThrowStmt } from '@angular/compiler';
 export class ManageModelPage implements OnInit {
   models:NN_Model[];
 
-  constructor(private nnModelService:ModelService, private machineService:MachineService) {
+  constructor(private nnModelService:ModelService, private machineService:MachineService, private router: Router) {
      this.nnModelService.loadModels();
      this.models = this.nnModelService.getModels();
    }
@@ -22,6 +22,11 @@ export class ManageModelPage implements OnInit {
 
   machineRegistered(){
     return this.machineService.machineRegistered;
+  }
+
+  goToWorkspace(model){
+    this.nnModelService.currentModel = model;
+    this.router.navigate(['/', 'main', 'create-model']);
   }
 
 }

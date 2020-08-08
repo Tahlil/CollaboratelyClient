@@ -9,6 +9,7 @@ export class DataService {
   private datasets: Data[] = []; 
   private fileTypes = ['csv', 'tsv', "xls", "xlsx"]
   private dataTypes = ["Nominal", "Ordinal", "Interval",  "Ratio"];
+  currentData: Data;
 
   constructor(private helper:HelperService) {
   }

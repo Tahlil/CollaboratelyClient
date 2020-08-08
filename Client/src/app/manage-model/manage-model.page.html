@@ -62,6 +62,9 @@
           <ion-text *ngIf="!item.isTrained" color="warning">
             <h1> <img src="assets/images/notTrained.svg" width="41px" height="31px" alt="" srcset=""> Model not trained yet </h1>
           </ion-text>
+          <ion-button (click)="goToWorkspace(item)" expand="block" fill="clear" shape="round"  color="primary">
+            Open in workspace
+          </ion-button>
         </ion-card-content>
       </ion-card>
     </ion-col>

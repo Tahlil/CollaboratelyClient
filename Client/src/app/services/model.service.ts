@@ -7,7 +7,9 @@ import { HelperService } from "./helper.service";
 })
 export class ModelService {
   private models: NN_Model[] = []; 
+  currentModel: NN_Model;
   id:number;
+
   regularizationOptions:Array<string> = ["None", "L1", "L2"];
   activationFunctions:Array<string> = ["Linear", "Relu", "Leaky Relu", "Sigmoid", "Softmax", "Tanh", "Swish"];
   trainingMethods:Array<string> = ["Batch Gradient Descent", "Mini Batch Gradient Descent", "Stochastic Gradient Descent"]
