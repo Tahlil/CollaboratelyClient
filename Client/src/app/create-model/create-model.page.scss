@@ -13,6 +13,11 @@ text {
     stroke-opacity: .6;
   }
 
+  figure{
+       min-width: 14em;
+    //   overflow-x: auto;
+  }
+
 .slider-container {
     width: 50vw;
     min-width: 400px;

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, HostListener } from '@angular/core';
 import { ModelService } from "../services/model.service";
 import * as d3 from "d3";
 @Component({
@@ -7,13 +7,14 @@ import * as d3 from "d3";
   styleUrls: ['./create-model.page.scss'],
   encapsulation: ViewEncapsulation.None
 })
+
 export class CreateModelPage implements OnInit {
   loadedModel;
   graph;
 
   private svg;
   private margin = 50;
-  private width = 750 - (this.margin * 2);
+  private width;
   private height = 400 - (this.margin * 2);
 
 
@@ -33,7 +34,17 @@ export class CreateModelPage implements OnInit {
     }; 
   }
 
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.width = window.innerWidth;
+    console.log(this.width);
+    d3.select('svg').remove();
+    this.createSvg();
+    this.drawGraph();
+  }
+  
   ngOnInit() {
+    this.width = window.innerWidth;
     this.loadedModel = this.modelService.currentModel;
     this.createSvg();
     this.drawGraph();
