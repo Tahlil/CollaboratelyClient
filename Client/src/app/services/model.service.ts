@@ -19,9 +19,9 @@ export class ModelService {
   }
 
   private getRandomNumberOfLayers():Array<number>{
-    let numberOfLayers = this.helper.getRandomInt(5,11), layers= [];
+    let numberOfLayers = this.helper.getRandomInt(3,6), layers= [];
     for (let layer = 0; layer < numberOfLayers; layer++) {
-      layers.push(this.helper.getRandomInt(1,11));
+      layers.push(this.helper.getRandomInt(1,7));
     }
     return layers;
   }

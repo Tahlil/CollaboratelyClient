@@ -14,9 +14,35 @@ text {
   }
 
   figure{
-       min-width: 14em;
-    //   overflow-x: auto;
+    min-width: 14em;
+    overflow: auto;
+    
   }
+
+  figure::-webkit-scrollbar-track
+  {
+      -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+      background-color: #F5F5F5;
+  }
+    
+    figure::-webkit-scrollbar
+    {
+        width: 10px;
+        background-color: #F5F5F5;
+    }
+    
+    figure::-webkit-scrollbar-thumb
+    {
+        background-color: #F90;	
+        background-image: -webkit-linear-gradient(45deg,
+                                                  rgba(255, 255, 255, .2) 25%,
+                                                  transparent 25%,
+                                                  transparent 50%,
+                                                  rgba(255, 255, 255, .2) 50%,
+                                                  rgba(255, 255, 255, .2) 75%,
+                                                  transparent 75%,
+                                                  transparent)
+    }
 
 .slider-container {
     width: 50vw;
@@ -45,7 +71,7 @@ text {
 
  @media (min-width: 68em) {
     #bar{
-        margin-left: 15em;
+        margin-left: 16em;
         padding-top: 0em;  
     }
  }
