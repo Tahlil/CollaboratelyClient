@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-
+import { ScrollbarThemeModule  } from '../directives/scrollbar.directive';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { MainPageRoutingModule } from './main-routing.module';
@@ -14,7 +14,8 @@ import { MainPage } from './main.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    MainPageRoutingModule
+    MainPageRoutingModule,
+    ScrollbarThemeModule
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }

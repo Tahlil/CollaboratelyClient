@@ -84,6 +84,13 @@ $blue: #3498db;
   ion-card{
     cursor: pointer;
   }
+
+  @media (min-width: 42em) {
+    #model{
+      padding-right: 3rem;
+      margin-right: 3rem;
+    }
+  }
 @media (min-width: 68em) {
     #model{
       padding-right: 11rem;
@@ -91,12 +98,7 @@ $blue: #3498db;
     }
  }
 
- @media (min-width: 42em) {
-  #model{
-    padding-right: 3rem;
-    margin-right: 3rem;
-  }
-}
+
 
  .font-bold{
    font-weight: bold;
