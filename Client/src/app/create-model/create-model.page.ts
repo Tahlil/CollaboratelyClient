@@ -43,7 +43,6 @@ export class CreateModelPage implements OnInit {
   @HostListener("window:resize", ["$event"])
   onResize(event) {
     this.width = window.innerWidth-111;
-
     console.log(this.width);
     this.checkLeftCut()
     d3.select("svg").remove();
@@ -164,8 +163,8 @@ export class CreateModelPage implements OnInit {
     console.log(nodes);
     let lastNodes= [];
     for (let i = 0; i < this.layerIndexes.length; i++) {
-      lastNodes.push({x: nodes[this.layerIndexes[i]].x, y: nodes[this.layerIndexes[i]].y});
-      lastNodes[i].x -= 21;
+      lastNodes.push({x: nodes[this.layerIndexes[i]].x, y: nodes[this.layerIndexes[i]].y, label: this.loadedModel.activations[i]});
+      lastNodes[i].x -= 30;
       lastNodes[i].y += 25;
     }
     console.log("Last nodes");
@@ -224,7 +223,7 @@ export class CreateModelPage implements OnInit {
       let rect = lastNode
       .append("rect")
       .attr("class", "node")
-      .attr("width", nodeSize+17)
+      .attr("width", nodeSize+51)
       .attr("height", nodeSize)
       .style("fill", "red"); 
 
@@ -233,6 +232,16 @@ export class CreateModelPage implements OnInit {
       .attr("dx", "-.35em")
       .attr("dy", ".35em")
       .attr("font-size", ".6em")
+      .text(function (d) {
+        return d.label;
+      });
+
+      lastNode
+      .append("text")
+      .attr("dx", "+1.1em")
+      .attr("dy", "1.3em")
+      .attr("font-size", "0.7em")
+      .style('fill', 'white')
       .text(function (d) {
         return d.label;
       });
