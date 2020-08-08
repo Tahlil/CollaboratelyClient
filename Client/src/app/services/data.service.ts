@@ -34,7 +34,7 @@ export class DataService {
           columns: this.helper.getListOfWords(numberOfColumns),
           columnTypes: this.getRandomTypes(numberOfColumns),
           numberOfRow: this.helper.getRandomInt(10, 10000),
-          isPrivate: false
+          isPrivate: Math.random() < 0.5 ? true : false
         }
       );   
     }    

@@ -47,6 +47,16 @@
               <p >
                 {{item.description}}
               </p>
+              <hr>
+          <ion-text color="primary">
+            <h3>Permission: </h3>
+          </ion-text>
+          <ion-text *ngIf="!item.isEncrypted" color="success">
+           <h1><ion-icon name="lock-open"></ion-icon> Public </h1>
+          </ion-text>
+          <ion-text *ngIf="item.isEncrypted" color="danger">
+            <h1><ion-icon name="lock-closed"></ion-icon> Private </h1>
+          </ion-text>
             </ion-card-content>
           </ion-card>
         </ion-col>
