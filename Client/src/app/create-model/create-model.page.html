@@ -1,63 +1,139 @@
 <ion-content>
-  <figure id="bar" ></figure>
+  <figure id="bar"></figure>
   <ion-grid id="options">
     <ion-row>
-      <ion-col size="4" size-md="2"  class="ion-text-center ion-align-self-center" >
+      <ion-col
+        size="4"
+        size-md="2"
+        class="ion-text-center ion-align-self-center"
+      >
         <ion-icon class="arrow" name="arrow-forward"></ion-icon>
-        <ion-button class="plus-btn" color="success" (click)="onClick()" fill="solid" shape="round">
-          +
+        <ion-button
+          class="plus-btn"
+          color="success"
+          (click)="onClick()"
+          fill="solid"
+          shape="round"
+        >          +
         </ion-button>
-        <br>
-        <ion-text color="primary">Input Layers<br><ion-badge color="secondary" mode="ios">{{this.inputLayer}}</ion-badge> node{{this.inputLayer == 1 ? '' : 's'}} </ion-text>
-        <br>
-        <ion-button class="rm-btn" color="danger" (click)="onClick()" fill="solid" shape="round">
+        <br />
+        <ion-text color="primary"
+          >Input Layers<br /><ion-badge color="secondary" mode="ios"
+            >{{this.inputLayer}}</ion-badge
+          >
+          node{{this.inputLayer == 1 ? '' : 's'}}
+        </ion-text>
+        <br />
+        <ion-button
+          class="rm-btn"
+          color="danger"
+          (click)="onClick()"
+          fill="solid"
+          shape="round"
+        >
           -
         </ion-button>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+
+        <br />
+        <br />
+        <br />
+        <br />
       </ion-col>
-      <ion-col *ngFor="let hiddenLayer of this.hiddenLayers; let i = index" size="4" size-md="2"  class="ion-text-center">
+      <ion-col
+        *ngFor="let hiddenLayer of this.hiddenLayers; let i = index"
+        size="4"
+        size-md="2"
+        class="ion-text-center"
+      >
         <ion-icon class="arrow" name="arrow-forward"></ion-icon>
-        <ion-button class="plus-btn" color="success" (click)="onClick()" fill="solid" shape="round">
+        <ion-button
+          class="plus-btn"
+          color="success"
+          (click)="onClick()"
+          fill="solid"
+          shape="round"
+        >
           +
         </ion-button>
-        <br>
-        <ion-text color="secondary">Hidden Layer {{i+1}}<br><ion-badge color="secondary" mode="ios">{{hiddenLayer}}</ion-badge> node{{hiddenLayer == 1 ? '' : 's'}}</ion-text>
-        <br>
-        <ion-button class="rm-btn" color="danger" (click)="onClick()" fill="solid" shape="round">
+        <br />
+        <ion-text color="secondary"
+          >Hidden Layer {{i+1}}<br /><ion-badge color="secondary" mode="ios"
+            >{{hiddenLayer}}</ion-badge
+          >
+          node{{hiddenLayer == 1 ? '' : 's'}}</ion-text
+        >
+        <br />
+        <ion-button
+          class="rm-btn"
+          color="danger"
+          (click)="onClick()"
+          fill="solid"
+          shape="round"
+        >
           -
         </ion-button>
+        <br />
+
+        <ion-label class="af">Activation function</ion-label>
+        <br />
+        <ion-select
+          placeholder="Select"
+          [value]="this.loadedModel.activations[i]"
+        >
+          <ion-select-option
+            *ngFor="let af of this.modelService.getActivationFunctions()"
+            value="{{af}}"
+            >{{af}}</ion-select-option
+          >
+        </ion-select>
         <br>
-        
-          <ion-label class="af">Activation function</ion-label>
-          <br>
-          <ion-select placeholder="Select" [value]="this.loadedModel.activations[i]">
-            <ion-select-option  *ngFor="let af of this.modelService.getActivationFunctions()"  value="{{af}}">{{af}}</ion-select-option>
-          </ion-select>
-        
-          
-     
+        <ion-button (click)="onClick()" color="danger" expand="block" fill="solid" shape="round">
+          Delete layer &nbsp; <ion-icon name="trash"></ion-icon>
+        </ion-button>
       </ion-col>
-      <ion-col size="4" size-md="2"  class="ion-text-center">
-        <ion-button class="plus-btn" color="success" (click)="onClick()" fill="solid" shape="round">
+      <ion-col size="4" size-md="2" class="ion-text-center">
+        <ion-button
+          class="plus-btn"
+          color="success"
+          (click)="onClick()"
+          fill="solid"
+          shape="round"
+        >
           +
         </ion-button>
-        <br>
-        <ion-text color="tertiary">Output Layers<br><ion-badge color="secondary" mode="ios">{{this.outputLayer}}</ion-badge> node{{this.outputLayer == 1 ? '' : 's'}}</ion-text>   
-        <br>
-        <ion-button class="rm-btn" color="danger" (click)="onClick()" fill="solid" shape="round">
+        <br />
+        <ion-text color="tertiary"
+          >Output Layers<br /><ion-badge color="secondary" mode="ios"
+            >{{this.outputLayer}}</ion-badge
+          >
+          node{{this.outputLayer == 1 ? '' : 's'}}</ion-text
+        >
+        <br />
+        <ion-button
+          class="rm-btn"
+          color="danger"
+          (click)="onClick()"
+          fill="solid"
+          shape="round"
+        >
           -
         </ion-button>
-        <br>
-        
-          <ion-label class="af">Activation function</ion-label>
-          <br>
-          <ion-select placeholder="Select">
-            <ion-select-option [value]="af" *ngFor="let af of this.modelService.getActivationFunctions()">{{af}}</ion-select-option>
-          </ion-select>
+        <br />
+
+        <ion-label class="af">Activation function</ion-label>
+        <br />
+        <ion-select placeholder="Select"  [value]="this.loadedModel.activations[this.loadedModel.activations.length-1]">
+          <ion-select-option
+            [value]="af"
+            *ngFor="let af of this.modelService.getActivationFunctions()"
+            >{{af}}</ion-select-option
+          >
+        </ion-select>
       </ion-col>
     </ion-row>
   </ion-grid>
