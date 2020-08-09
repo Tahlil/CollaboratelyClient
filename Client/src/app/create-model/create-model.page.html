@@ -13,6 +13,11 @@
         <ion-button class="rm-btn" color="danger" (click)="onClick()" fill="solid" shape="round">
           -
         </ion-button>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
       </ion-col>
       <ion-col *ngFor="let hiddenLayer of this.hiddenLayers; let i = index" size="4" size-md="2"  class="ion-text-center">
         <ion-icon class="arrow" name="arrow-forward"></ion-icon>
@@ -25,6 +30,16 @@
         <ion-button class="rm-btn" color="danger" (click)="onClick()" fill="solid" shape="round">
           -
         </ion-button>
+        <br>
+        
+          <ion-label class="af">Activation function</ion-label>
+          <br>
+          <ion-select placeholder="Select" [value]="this.loadedModel.activations[i]">
+            <ion-select-option  *ngFor="let af of this.modelService.getActivationFunctions()"  value="{{af}}">{{af}}</ion-select-option>
+          </ion-select>
+        
+          
+     
       </ion-col>
       <ion-col size="4" size-md="2"  class="ion-text-center">
         <ion-button class="plus-btn" color="success" (click)="onClick()" fill="solid" shape="round">
@@ -36,6 +51,13 @@
         <ion-button class="rm-btn" color="danger" (click)="onClick()" fill="solid" shape="round">
           -
         </ion-button>
+        <br>
+        
+          <ion-label class="af">Activation function</ion-label>
+          <br>
+          <ion-select placeholder="Select">
+            <ion-select-option [value]="af" *ngFor="let af of this.modelService.getActivationFunctions()">{{af}}</ion-select-option>
+          </ion-select>
       </ion-col>
     </ion-row>
   </ion-grid>

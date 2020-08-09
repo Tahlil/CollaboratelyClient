@@ -11,7 +11,7 @@ export class ModelService {
   id:number;
 
   regularizationOptions:Array<string> = ["None", "L1", "L2"];
-  activationFunctions:Array<string> = ["Linear", "Relu", "Leaky Relu", "Sigmoid", "Softmax", "Tanh", "Swish"];
+  private activationFunctions:Array<string> = ["Linear", "Relu", "Leaky Relu", "Sigmoid", "Softmax", "Tanh", "Swish"];
   trainingMethods:Array<string> = ["Batch Gradient Descent", "Mini Batch Gradient Descent", "Stochastic Gradient Descent"]
 
   constructor(private helper:HelperService) {
@@ -78,5 +78,9 @@ export class ModelService {
 
   getModels(){
     return this.models;
+  }
+
+  getActivationFunctions(){
+    return this.activationFunctions;
   }
 }

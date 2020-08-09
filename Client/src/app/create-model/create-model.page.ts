@@ -28,7 +28,10 @@ export class CreateModelPage implements OnInit {
   private outputLayer=0;
 
 
+
   constructor(private modelService: ModelService) {
+    this.loadedModel = this.modelService.currentModel;
+
     this.graph = {
       nodes: [
         // { label: "i0", layer: 1 },
@@ -228,8 +231,9 @@ export class CreateModelPage implements OnInit {
     let rect = lastNode
       .append("rect")
       .attr("class", "node")
-      .attr("width", nodeSize + 51)
+      .attr("width", 81)
       .attr("height", nodeSize)
+      .attr('stroke', '#8B0000')
       .style("fill", "red");
 
     node
@@ -243,10 +247,20 @@ export class CreateModelPage implements OnInit {
 
     lastNode
       .append("text")
-      .attr("dx", "+1.1em")
+      .attr("dx", function (d) {
+        if(d.label == "Linear") return "2.3em"
+        if(d.label == "Relu") return "2.6em"
+        if(d.label == "Leaky Relu") return "1.3em"
+        if(d.label == "Sigmoid") return "1.7em"
+        if(d.label == "Softmax") return "1.7em"
+        if(d.label == "Tanh") return "2.5em"
+        if(d.label == "Swish") return "2.1em"
+        return "1.1em"
+      })
       .attr("dy", "1.3em")
       .attr("font-size", "0.7em")
       .style("fill", "white")
+      
       .text(function (d) {
         return d.label;
       });
