@@ -20,7 +20,7 @@ export class CreateModelPage implements OnInit {
   private svg;
   private margin = 50;
   private width;
-  private height = 600 - this.margin * 2;
+  private height = 670 - this.margin * 2;
   private leftCut = 111;
   private layerIndexes = [];
   private inputLayer = 0;
@@ -90,7 +90,7 @@ export class CreateModelPage implements OnInit {
     for (let i = 0; i < this.hiddenLayers.length; i++) {
       let hiddenLayer = this.hiddenLayers[i];
       for (let j = 0; j < hiddenLayer; j++) {
-        const curLabel = "h" + i.toString() + j.toString();
+        const curLabel = "h" + (i+1).toString() + j.toString();
         this.graph.nodes.push({ label: curLabel, layer: i + 2 });
         layerIndex++;
       }
@@ -175,9 +175,17 @@ export class CreateModelPage implements OnInit {
       lastNodes[i].x -= 30;
       lastNodes[i].y += 25;
     }
-    console.log("Last nodes");
-    console.log(lastNodes);
 
+    let everyLayers= [{
+      x: nodes[0].x,
+      y: nodes[0].y,
+      label: "none",
+      layer: 0}, ...lastNodes.map((x, index) => {
+        return {...x, layer:index+1};
+       }
+      )]
+
+    
     // draw links
     let link = this.svg
       .selectAll(".link")
@@ -220,6 +228,19 @@ export class CreateModelPage implements OnInit {
         return "translate(" + d.x + "," + d.y + ")";
       });
 
+      let slastNode = this.svg
+      .selectAll(".node")
+      .data([{ x: nodes[this.inputLayer-1].x,y: nodes[this.inputLayer-1].y},...lastNodes])
+      .enter()
+      .append("g")
+      .attr("transform", function (d) {
+        return "translate(" + d.x + "," + d.y + ")";
+      });
+      console.log(lastNode);
+      console.log(slastNode);
+      
+      
+
     let circle = node
       .append("circle")
       .attr("class", "node")
@@ -245,6 +266,44 @@ export class CreateModelPage implements OnInit {
         return d.label;
       });
 
+
+      // let layerTitles = this.svg
+      // .selectAll(".node")
+      // .data(lastNodes)
+      // .enter()
+      // .append("g")
+      // .attr("transform", function (d) {
+      //   return "translate(" + d.x + "," + d.y + ")";
+      // })
+      // console.log("Last nodes");
+      // console.log(lastNodes);
+      // console.log("Every layers");
+      // console.log(everyLayers);
+
+      // console.log(lastNode);
+      
+      // console.log(layerTitles);
+    
+      
+      let index = 0;
+      slastNode
+     
+      .append("text")
+      .attr("dx", "-0.1em")
+      .attr("dy", "2.1em")
+      .attr("font-size", "1.1em")
+      .style("fill", "black")
+
+      .text(function (d) {
+        let output= ""
+        if(index === 0) output= "Input Layer";
+        else if(index === that.hiddenLayers.length+1)  output= "Output Layer";
+        else output= "Hidden Layer " + index;
+        index++
+        return output;
+      });
+
+    
     lastNode
       .append("text")
       .attr("dx", function (d) {
@@ -262,8 +321,12 @@ export class CreateModelPage implements OnInit {
       .style("fill", "white")
 
       .text(function (d) {
+        console.log("Test...");
+        
         return d.label;
       });
+
+      
   }
 
   private redraw(){
