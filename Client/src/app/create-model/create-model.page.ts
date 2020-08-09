@@ -359,6 +359,13 @@ export class CreateModelPage implements OnInit {
     this.redraw();
   }
 
+  private onActivationFunctionChange(e, index){
+    console.log(e);
+    console.log("Clicked.");
+    this.loadedModel.activations[index] = e.target.value;
+    this.redraw();
+  }
+
   removeNode(layerNumber) {
     if (
       (layerNumber == 0 && this.inputLayer === 1) ||

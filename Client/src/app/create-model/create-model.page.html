@@ -84,6 +84,7 @@
         <ion-select
           placeholder="Select"
           [value]="this.loadedModel.activations[i]"
+          (ionChange) = "this.onActivationFunctionChange($event, i)"
         >
           <ion-select-option
             *ngFor="let af of this.modelService.getActivationFunctions()"
