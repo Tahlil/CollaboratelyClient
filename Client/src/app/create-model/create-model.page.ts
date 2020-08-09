@@ -18,9 +18,8 @@ export class CreateModelPage implements OnInit {
   graph;
 
   private svg;
-  private margin = 50;
   private width;
-  private height = 670 - this.margin * 2;
+  private height = 690;
   private leftCut = 111;
   private layerIndexes = [];
   private inputLayer = 0;
@@ -29,7 +28,6 @@ export class CreateModelPage implements OnInit {
 
   constructor(private modelService: ModelService) {
     this.loadedModel = this.modelService.currentModel;
-
     this.graph = {
       nodes: [
         // { label: "i0", layer: 1 },
@@ -228,7 +226,7 @@ export class CreateModelPage implements OnInit {
         return "translate(" + d.x + "," + d.y + ")";
       });
 
-      let slastNode = this.svg
+      let layerTitle = this.svg
       .selectAll(".node")
       .data([{ x: nodes[this.inputLayer-1].x,y: nodes[this.inputLayer-1].y},...lastNodes])
       .enter()
@@ -237,7 +235,7 @@ export class CreateModelPage implements OnInit {
         return "translate(" + d.x + "," + d.y + ")";
       });
       console.log(lastNode);
-      console.log(slastNode);
+      console.log(layerTitle);
       
       
 
@@ -267,41 +265,27 @@ export class CreateModelPage implements OnInit {
       });
 
 
-      // let layerTitles = this.svg
-      // .selectAll(".node")
-      // .data(lastNodes)
-      // .enter()
-      // .append("g")
-      // .attr("transform", function (d) {
-      //   return "translate(" + d.x + "," + d.y + ")";
-      // })
-      // console.log("Last nodes");
-      // console.log(lastNodes);
-      // console.log("Every layers");
-      // console.log(everyLayers);
-
-      // console.log(lastNode);
-      
-      // console.log(layerTitles);
-    
       
       let index = 0;
-      slastNode
+      if (window.innerWidth > 700) {
+        layerTitle
      
-      .append("text")
-      .attr("dx", "-0.1em")
-      .attr("dy", "2.1em")
-      .attr("font-size", "1.1em")
-      .style("fill", "black")
-
-      .text(function (d) {
-        let output= ""
-        if(index === 0) output= "Input Layer";
-        else if(index === that.hiddenLayers.length+1)  output= "Output Layer";
-        else output= "Hidden Layer " + index;
-        index++
-        return output;
-      });
+        .append("text")
+        .attr("dx", "-0.1em")
+        .attr("dy", "2.1em")
+        .attr("font-size", "1.1em")
+        .style("fill", "black")
+  
+        .text(function (d) {
+          let output= ""
+          if(index === 0) output= "Input Layer";
+          else if(index === that.hiddenLayers.length+1)  output= "Output Layer";
+          else output= "Hidden Layer " + index;
+          index++
+          return output;
+        });  
+      }
+      
 
     
     lastNode
