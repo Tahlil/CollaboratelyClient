@@ -79,9 +79,6 @@ ion-icon {
     }
   }
 
-  ion-card{
-    cursor: pointer;
-  }
   @media (min-width: 68em) {
     #data{
       padding-right: 11rem;
@@ -127,7 +124,11 @@ ion-icon {
   }  
  }
 
- ion-button{
-  border: 1px solid var(--ion-color-primary);
-  border-radius: 1rem;
+ ion-button:hover{
+  --box-shadow: 0px 5px 11px rgba(212, 129, 4, 0.59);
+ }
+
+ ion-button > span{
+  color: white !important;
+  font-size: large;
  }

@@ -81,10 +81,6 @@ $blue: #3498db;
     }
   }
 
-  ion-card{
-    cursor: pointer;
-  }
-
   @media (min-width: 42em) {
     #model{
       padding-right: 3rem;
@@ -138,7 +134,11 @@ $blue: #3498db;
    }  
   }
 
-  ion-button{
-    border: 1px solid var(--ion-color-primary);
-    border-radius: 1rem;
+  ion-button:hover{
+    --box-shadow: 0px 5px 11px rgba(212, 129, 4, 0.59);
+   }
+
+   ion-button > span{
+    color: white !important;
+    font-size: la;
    }

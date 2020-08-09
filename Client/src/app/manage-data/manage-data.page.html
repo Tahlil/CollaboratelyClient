@@ -53,8 +53,12 @@
           <ion-text *ngIf="item.isEncrypted" color="danger">
             <h1><ion-icon name="lock-closed"></ion-icon> Private </h1>
           </ion-text>
-          <ion-button (click)="goToUpdateData(item)" expand="block" fill="clear" shape="round" color="primary">
-            Open dataset
+          <ion-button (click)="goToUpdateData(item)" expand="block" fill="solid" shape="round" color="secondary">
+            <span>Open dataset</span>
+          </ion-button>
+          <br>
+          <ion-button (click)="goToUpdateData(item)" expand="block" fill="solid" shape="round" color="primary">
+            <span>Develop model</span>
           </ion-button>
          
             </ion-card-content>

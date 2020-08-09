@@ -20,9 +20,14 @@ export class CreateModelPage implements OnInit {
   private svg;
   private margin = 50;
   private width;
-  private height = 600 - this.margin*2;
+  private height = 600 - this.margin * 2;
   private leftCut = 111;
   private layerIndexes = [];
+  private inputLayer=0;
+  private hiddenLayers=[];
+  private outputLayer=0;
+
+
   constructor(private modelService: ModelService) {
     this.graph = {
       nodes: [
@@ -42,16 +47,16 @@ export class CreateModelPage implements OnInit {
 
   @HostListener("window:resize", ["$event"])
   onResize(event) {
-    this.width = window.innerWidth-111;
+    this.width = window.innerWidth - 111;
     console.log(this.width);
-    this.checkLeftCut()
+    this.checkLeftCut();
     d3.select("svg").remove();
     this.createSvg();
     this.drawGraph();
   }
 
   ngOnInit() {
-    this.width = window.innerWidth-111;
+    this.width = window.innerWidth - 111;
     this.checkLeftCut();
     this.loadedModel = this.modelService.currentModel;
     this.createGraph();
@@ -59,44 +64,42 @@ export class CreateModelPage implements OnInit {
     this.drawGraph();
   }
 
-  private checkLeftCut(){
-    if(window.innerWidth < 1192){
+  private checkLeftCut() {
+    if (window.innerWidth < 1192) {
       this.leftCut = -11;
-    }
-    else{
+    } else {
       this.leftCut = 111;
     }
   }
 
-  private createGraph(){
+  private createGraph() {
     this.layerIndexes = [];
     let layerIndex = 0;
     let layers = this.modelService.currentModel.layers;
-    let inputLayers = layers[0];
-    let hiddenLayers = layers.slice(1, layers.length-1);
-    let outputLayer = layers[layers.length-1]
-    for (let i = 0; i < inputLayers; i++) {
-      const curLabel = "i"+i;
-      this.graph.nodes.push({ label: curLabel, layer: 1});
+    this.inputLayer = layers[0];
+    this.hiddenLayers = layers.slice(1, layers.length - 1);
+    this.outputLayer = layers[layers.length - 1];
+    for (let i = 0; i < this.inputLayer; i++) {
+      const curLabel = "i" + i;
+      this.graph.nodes.push({ label: curLabel, layer: 1 });
       layerIndex++;
     }
-    for (let i = 0; i < hiddenLayers.length; i++) {
-      let hiddenLayer = hiddenLayers[i];
+    for (let i = 0; i < this.hiddenLayers.length; i++) {
+      let hiddenLayer = this.hiddenLayers[i];
       for (let j = 0; j < hiddenLayer; j++) {
-        const curLabel = "h"+i.toString()+j.toString();
-        this.graph.nodes.push({ label: curLabel, layer: i+2 });
-        layerIndex++;  
+        const curLabel = "h" + i.toString() + j.toString();
+        this.graph.nodes.push({ label: curLabel, layer: i + 2 });
+        layerIndex++;
       }
-      this.layerIndexes.push(layerIndex-1);
+      this.layerIndexes.push(layerIndex - 1);
     }
-    for (let i = 0; i < outputLayer; i++) {
-      const curLabel = "o"+i;
+    for (let i = 0; i < this.outputLayer; i++) {
+      const curLabel = "o" + i;
       this.graph.nodes.push({ label: curLabel, layer: layers.length });
       layerIndex++;
     }
-    this.layerIndexes.push(layerIndex-1);
+    this.layerIndexes.push(layerIndex - 1);
     console.log(this.graph.nodes);
-    
   }
 
   private createSvg(): void {
@@ -106,8 +109,6 @@ export class CreateModelPage implements OnInit {
       .attr("width", this.width)
       .attr("height", this.height);
   }
-
-  
 
   private drawGraph(): void {
     // // Create the X-axis band scale
@@ -135,12 +136,12 @@ export class CreateModelPage implements OnInit {
       })
     );
 
-    let xdist = (this.width / Object.keys(netsize).length),
+    let xdist = this.width / Object.keys(netsize).length,
       ydist = (this.height - 15) / largestLayerSize;
     let that = this;
     // create node locations
     nodes.map(function (d) {
-      d["x"] = ((d.layer - 0.5) * xdist)-that.leftCut;
+      d["x"] = (d.layer - 0.5) * xdist - that.leftCut;
       d["y"] =
         (d.lidx - 0.5 + (largestLayerSize - netsize[d.layer]) / 2) * ydist + 10;
     });
@@ -159,17 +160,21 @@ export class CreateModelPage implements OnInit {
         return typeof d !== "undefined";
       });
     console.log("Nodes: ");
-    
+
     console.log(nodes);
-    let lastNodes= [];
+    let lastNodes = [];
     for (let i = 0; i < this.layerIndexes.length; i++) {
-      lastNodes.push({x: nodes[this.layerIndexes[i]].x, y: nodes[this.layerIndexes[i]].y, label: this.loadedModel.activations[i]});
+      lastNodes.push({
+        x: nodes[this.layerIndexes[i]].x,
+        y: nodes[this.layerIndexes[i]].y,
+        label: this.loadedModel.activations[i],
+      });
       lastNodes[i].x -= 30;
       lastNodes[i].y += 25;
     }
     console.log("Last nodes");
     console.log(lastNodes);
-    
+
     // draw links
     let link = this.svg
       .selectAll(".link")
@@ -204,13 +209,13 @@ export class CreateModelPage implements OnInit {
       });
 
     let lastNode = this.svg
-    .selectAll(".node")
-    .data(lastNodes)
-    .enter()
-    .append("g")
-    .attr("transform", function (d) {
-      return "translate(" + d.x + "," + d.y + ")";
-    });
+      .selectAll(".node")
+      .data(lastNodes)
+      .enter()
+      .append("g")
+      .attr("transform", function (d) {
+        return "translate(" + d.x + "," + d.y + ")";
+      });
 
     let circle = node
       .append("circle")
@@ -220,12 +225,12 @@ export class CreateModelPage implements OnInit {
         return color(d.layer);
       });
 
-      let rect = lastNode
+    let rect = lastNode
       .append("rect")
       .attr("class", "node")
-      .attr("width", nodeSize+51)
+      .attr("width", nodeSize + 51)
       .attr("height", nodeSize)
-      .style("fill", "red"); 
+      .style("fill", "red");
 
     node
       .append("text")
@@ -236,12 +241,12 @@ export class CreateModelPage implements OnInit {
         return d.label;
       });
 
-      lastNode
+    lastNode
       .append("text")
       .attr("dx", "+1.1em")
       .attr("dy", "1.3em")
       .attr("font-size", "0.7em")
-      .style('fill', 'white')
+      .style("fill", "white")
       .text(function (d) {
         return d.label;
       });
