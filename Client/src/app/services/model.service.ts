@@ -12,8 +12,8 @@ export class ModelService {
 
   regularizationOptions:Array<string> = ["None", "L1", "L2"];
   private activationFunctions:Array<string> = ["Linear", "Relu", "Leaky Relu", "Sigmoid", "Softmax", "Tanh", "Swish"];
-  trainingMethods:Array<string> = ["Batch Gradient Descent", "Mini Batch Gradient Descent", "Stochastic Gradient Descent"]
-
+  private trainingMethods:Array<string> = ["Batch Gradient Descent", "Mini Batch Gradient Descent", "Stochastic Gradient Descent"]
+  private optimizers = ["none", "Ada boost"]
   constructor(private helper:HelperService) {
     this.id=0;
   }
@@ -36,7 +36,7 @@ export class ModelService {
       isEncrypted: Math.random() < 0.5 ? true : false,
       modelName: this.helper.generateRandomWord(),
       isTrained: false,
-      optimizers: "none",
+      optimizer: "none",
       trainingMethod: this.trainingMethods[this.helper.getRandomInt(0, this.trainingMethods.length)],
       layers: [numberOfFeatures, ...layers],
       biases: [],
@@ -78,6 +78,18 @@ export class ModelService {
 
   getModels(){
     return this.models;
+  }
+
+  getOptimizers(){
+    return this.optimizers;
+  }
+
+  getTrainingMethods(){
+    return this.trainingMethods;
+  }
+
+  getRegularizationOptions(){
+    return this.regularizationOptions;
   }
 
   getActivationFunctions(){

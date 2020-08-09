@@ -3,7 +3,7 @@ export interface NN_Model {
     modelName: string;
     isEncrypted:boolean;
     isTrained: boolean;
-    optimizers: string;
+    optimizer: string;
     trainingMethod: string;
     layers: Array<number>;
     biases: Array<number>;

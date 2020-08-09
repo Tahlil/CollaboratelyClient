@@ -137,5 +137,61 @@
         </ion-select>
       </ion-col>
     </ion-row>
+    <ion-row>
+      <ion-col size="6" size-md="2">
+        <ion-button color="success" (click)="onClick()" expand="block" fill="solid" shape="round">
+          <ion-icon name="add"></ion-icon> &nbsp; Add Hidden Layer
+        </ion-button>
+      </ion-col>
+      <ion-col size="6" size-md="3">
+        <ion-item>
+          <ion-label>Regularization option</ion-label>
+          <ion-select class="op" placeholder="Select"  [value]="this.loadedModel.regularization">
+            <ion-select-option
+              [value]="ro"
+              *ngFor="let ro of this.modelService.getRegularizationOptions()"
+              >{{ro}}</ion-select-option
+            >
+          </ion-select>
+        </ion-item>
+      </ion-col>
+      <ion-col size="6" size-md="4">
+        <ion-item>
+          <ion-label>Training method</ion-label>
+          <ion-select class="op tm" placeholder="Select"  [value]="this.loadedModel.trainingMethod">
+            <ion-select-option
+              [value]="tm"
+              *ngFor="let tm of this.modelService.getTrainingMethods()"
+              >{{tm}}</ion-select-option
+            >
+          </ion-select>
+        </ion-item>
+      </ion-col>
+      <ion-col size="6" size-md="3">
+        <ion-item>
+          <ion-label>Optimization</ion-label>
+          <ion-select class="op" placeholder="Select"  [value]="this.loadedModel.optimizer">
+            <ion-select-option
+              [value]="o"
+              *ngFor="let o of this.modelService.getOptimizers()"
+              >{{o}}</ion-select-option
+            >
+          </ion-select>
+        </ion-item>
+      </ion-col>
+      <ion-col size="6" size-md="4" offset-md="2">
+        <ion-item>
+          <ion-label position="floating">Learning rate</ion-label>
+          <ion-input step=0.1 type="number"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="6" size-md="4">
+        <ion-item>
+          <ion-label position="floating">Epoch</ion-label>
+          <ion-input step=10 type="number"></ion-input>
+        </ion-item>
+      </ion-col>
+    
+    </ion-row>
   </ion-grid>
 </ion-content>
