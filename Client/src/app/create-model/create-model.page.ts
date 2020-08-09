@@ -6,6 +6,9 @@ import {
 } from "@angular/core";
 import { ModelService } from "../services/model.service";
 import * as d3 from "d3";
+import { ModalController } from '@ionic/angular';
+import { GetLayerModalComponent } from '../modals/get-layer-modal/get-layer-modal.component';
+
 
 @Component({
   selector: "app-create-model",
@@ -26,7 +29,7 @@ export class CreateModelPage implements OnInit {
   private hiddenLayers = [];
   private outputLayer = 0;
 
-  constructor(private modelService: ModelService) {
+  constructor(private modelService: ModelService, public modalController: ModalController) {
     this.loadedModel = this.modelService.currentModel;
     this.graph = {
       nodes: [
@@ -65,6 +68,18 @@ export class CreateModelPage implements OnInit {
     this.createGraph();
     this.createSvg();
     this.drawGraph();
+  }
+
+  async presentModal(layerNumber) {
+    const modal = await this.modalController.create({
+      component: GetLayerModalComponent
+    });
+    modal.onDidDismiss().then((info) => {
+      console.log(info.data);
+      ;
+    });
+    return await modal.present();
+    
   }
 
   private checkLeftCut() {
@@ -368,5 +383,9 @@ export class CreateModelPage implements OnInit {
       }
     }
     this.redraw();
+  }
+
+  addHiddenLayer(){
+
   }
 }

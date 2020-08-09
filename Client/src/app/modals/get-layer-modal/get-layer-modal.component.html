@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-title>Fix number of nodes for new hidden layer</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+  
+  <ion-content padding>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12" class="ion-text-center">
+          <ion-item>
+            <ion-label>Number of nodes: </ion-label>
+            <ion-input (input)='onInputTime($event.target.value)' type="number" value=1 min="0" step="1" ></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col size="12" class="ion-text-center">
+          <ion-button (click)="createNewHL()" color="success"expand="block" fill="solid" shape="round">
+            Create new Hidden layer
+          </ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row style="padding-top: 35%;">
+ 
+        <ion-button style="width: 40%;" (click)="dismiss()" color="danger" fill="outline" expand="block"  shape="round">
+          Dismiss &nbsp; <ion-icon name="close"></ion-icon>
+        </ion-button>
+  
+    </ion-row>
+    </ion-grid>
+   
+  </ion-content>
+
