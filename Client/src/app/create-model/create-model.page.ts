@@ -349,14 +349,14 @@ export class CreateModelPage implements OnInit {
   }
 
   checkRemoveLayer(layerNumber){
-    if (this.hiddenLayers[layerNumber] === 0) {
-      this.hiddenLayers.splice(layerNumber, 1);
-      this.loadedModel.activations.splice(layerNumber, 1);
-    }
+    this.hiddenLayers.splice(layerNumber, 1);
+    this.loadedModel.activations.splice(layerNumber, 1);
   }
 
   private removeLayer(layerNumber){
-    
+    console.log("Removing layer " + layerNumber);
+    this.checkRemoveLayer(layerNumber-1);
+    this.redraw();
   }
 
   removeNode(layerNumber) {
@@ -372,7 +372,9 @@ export class CreateModelPage implements OnInit {
       this.outputLayer--;
     } else {
       this.hiddenLayers[layerNumber-1]--;
-      this.checkRemoveLayer(layerNumber-1);
+      if (this.hiddenLayers[layerNumber] === 0) {
+        this.checkRemoveLayer(layerNumber-1);
+      }
     }
     this.redraw();
   }
