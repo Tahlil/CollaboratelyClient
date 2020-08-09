@@ -285,16 +285,32 @@ export class CreateModelPage implements OnInit {
     this.redraw();
   }
 
+  checkRemoveLayer(layerNumber){
+    if (this.hiddenLayers[layerNumber] === 0) {
+      this.hiddenLayers.splice(layerNumber, 1);
+      this.loadedModel.activations.splice(layerNumber, 1);
+    }
+  }
+
+  private removeLayer(layerNumber){
+    
+  }
+
   removeNode(layerNumber) {
     if (
       (layerNumber == 0 && this.inputLayer === 1) ||
-      (layerNumber == this.outputLayer - 1 && this.outputLayer === 1)
+      (layerNumber == this.hiddenLayers.length+1 && this.outputLayer === 1)
     ) {
       return;
     }
     if (layerNumber === 0) {
-    } else if (layerNumber === this.outputLayer - 1) {
+      this.inputLayer--;
+    } else if (layerNumber === this.hiddenLayers.length+1) {
+      this.outputLayer--;
     } else {
+      this.hiddenLayers[layerNumber-1]--;
+      this.checkRemoveLayer(layerNumber-1);
     }
+    this.redraw();
   }
 }
