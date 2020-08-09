@@ -23,11 +23,9 @@ export class CreateModelPage implements OnInit {
   private height = 600 - this.margin * 2;
   private leftCut = 111;
   private layerIndexes = [];
-  private inputLayer=0;
-  private hiddenLayers=[];
-  private outputLayer=0;
-
-
+  private inputLayer = 0;
+  private hiddenLayers = [];
+  private outputLayer = 0;
 
   constructor(private modelService: ModelService) {
     this.loadedModel = this.modelService.currentModel;
@@ -62,6 +60,10 @@ export class CreateModelPage implements OnInit {
     this.width = window.innerWidth - 111;
     this.checkLeftCut();
     this.loadedModel = this.modelService.currentModel;
+    let layers = this.modelService.currentModel.layers;
+    this.inputLayer = layers[0];
+    this.hiddenLayers = layers.slice(1, layers.length - 1);
+    this.outputLayer = layers[layers.length - 1];
     this.createGraph();
     this.createSvg();
     this.drawGraph();
@@ -78,10 +80,8 @@ export class CreateModelPage implements OnInit {
   private createGraph() {
     this.layerIndexes = [];
     let layerIndex = 0;
-    let layers = this.modelService.currentModel.layers;
-    this.inputLayer = layers[0];
-    this.hiddenLayers = layers.slice(1, layers.length - 1);
-    this.outputLayer = layers[layers.length - 1];
+    this.graph.nodes = [];
+    let totalLayers = this.hiddenLayers.length+1;
     for (let i = 0; i < this.inputLayer; i++) {
       const curLabel = "i" + i;
       this.graph.nodes.push({ label: curLabel, layer: 1 });
@@ -98,7 +98,7 @@ export class CreateModelPage implements OnInit {
     }
     for (let i = 0; i < this.outputLayer; i++) {
       const curLabel = "o" + i;
-      this.graph.nodes.push({ label: curLabel, layer: layers.length });
+      this.graph.nodes.push({ label: curLabel, layer: totalLayers+1 });
       layerIndex++;
     }
     this.layerIndexes.push(layerIndex - 1);
@@ -233,7 +233,7 @@ export class CreateModelPage implements OnInit {
       .attr("class", "node")
       .attr("width", 81)
       .attr("height", nodeSize)
-      .attr('stroke', '#8B0000')
+      .attr("stroke", "#8B0000")
       .style("fill", "red");
 
     node
@@ -248,21 +248,53 @@ export class CreateModelPage implements OnInit {
     lastNode
       .append("text")
       .attr("dx", function (d) {
-        if(d.label == "Linear") return "2.3em"
-        if(d.label == "Relu") return "2.6em"
-        if(d.label == "Leaky Relu") return "1.3em"
-        if(d.label == "Sigmoid") return "1.7em"
-        if(d.label == "Softmax") return "1.7em"
-        if(d.label == "Tanh") return "2.5em"
-        if(d.label == "Swish") return "2.1em"
-        return "1.1em"
+        if (d.label == "Linear") return "2.3em";
+        if (d.label == "Relu") return "2.6em";
+        if (d.label == "Leaky Relu") return "1.3em";
+        if (d.label == "Sigmoid") return "1.7em";
+        if (d.label == "Softmax") return "1.7em";
+        if (d.label == "Tanh") return "2.5em";
+        if (d.label == "Swish") return "2.1em";
+        return "1.1em";
       })
       .attr("dy", "1.3em")
       .attr("font-size", "0.7em")
       .style("fill", "white")
-      
+
       .text(function (d) {
         return d.label;
       });
+  }
+
+  private redraw(){
+    d3.select("svg").remove();
+    this.createSvg();
+    this.createGraph();
+    this.drawGraph();
+  }
+
+  addNode(layerNumber) {
+    console.log("Layer Number: " + layerNumber);
+    if (layerNumber === 0) {
+      this.inputLayer++;
+    } else if (layerNumber === this.hiddenLayers.length+1) {
+      this.outputLayer++;
+    } else {
+      this.hiddenLayers[layerNumber-1]++;
+    }
+    this.redraw();
+  }
+
+  removeNode(layerNumber) {
+    if (
+      (layerNumber == 0 && this.inputLayer === 1) ||
+      (layerNumber == this.outputLayer - 1 && this.outputLayer === 1)
+    ) {
+      return;
+    }
+    if (layerNumber === 0) {
+    } else if (layerNumber === this.outputLayer - 1) {
+    } else {
+    }
   }
 }

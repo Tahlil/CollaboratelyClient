@@ -35,4 +35,6 @@ export class OrganizationPage implements OnInit {
     this.router.navigate(['/', 'auth', authType]);
   }
 
+  
+
 }

@@ -11,7 +11,7 @@
         <ion-button
           class="plus-btn"
           color="success"
-          (click)="onClick()"
+          (click)="this.addNode(0)"
           fill="solid"
           shape="round"
         >          +
@@ -27,7 +27,7 @@
         <ion-button
           class="rm-btn"
           color="danger"
-          (click)="onClick()"
+          (click)="this.removeNode(0)"
           fill="solid"
           shape="round"
         >
@@ -54,7 +54,7 @@
         <ion-button
           class="plus-btn"
           color="success"
-          (click)="onClick()"
+          (click)="this.addNode(i+1)"
           fill="solid"
           shape="round"
         >
@@ -71,7 +71,7 @@
         <ion-button
           class="rm-btn"
           color="danger"
-          (click)="onClick()"
+          (click)="this.removeNode(i+1)"
           fill="solid"
           shape="round"
         >
@@ -100,7 +100,7 @@
         <ion-button
           class="plus-btn"
           color="success"
-          (click)="onClick()"
+          (click)="this.addNode(this.hiddenLayers.length+1)"
           fill="solid"
           shape="round"
         >
@@ -117,7 +117,7 @@
         <ion-button
           class="rm-btn"
           color="danger"
-          (click)="onClick()"
+          (click)="this.removeNode(this.hiddenLayers.length+1)"
           fill="solid"
           shape="round"
         >
