@@ -63,9 +63,12 @@ export class CreateModelPage implements OnInit {
   }
 
   ngOnInit() {
+  
+    
     this.width = window.innerWidth - 111;
     this.checkLeftCut();
     this.loadedModel = this.modelService.currentModel;
+    console.log(this.loadedModel.activations);
     let layers = this.modelService.currentModel.layers;
     this.inputLayer = layers[0];
     this.hiddenLayers = layers.slice(1, layers.length - 1);
@@ -484,18 +487,20 @@ export class CreateModelPage implements OnInit {
       this.inputLayer++;
     } else if (layerNumber === this.hiddenLayers.length+1) {
       this.outputLayer++;
-      this.outputLayerBiases.push(0.0)
-      this.outputLayerWeights.push(1.0)
+      this.outputLayerBiases.push(0.0);
+      this.outputLayerWeights.push(1.0);
     } else {
       this.hiddenLayers[layerNumber-1]++;
-      this.hiddenLayerBiases[layerNumber-1].push(0.0)
-      this.hiddenLayerWeights[layerNumber-1].push(1.0)
+      this.hiddenLayerBiases[layerNumber-1].push(0.0);
+      this.hiddenLayerWeights[layerNumber-1].push(1.0);
     }
     this.redraw();
   }
 
   checkRemoveLayer(layerNumber){
     this.hiddenLayers.splice(layerNumber, 1);
+    this.hiddenLayerBiases.splice(layerNumber, 1);
+    this.hiddenLayerWeights.splice(layerNumber, 1);
     this.loadedModel.activations.splice(layerNumber, 1);
   }
 
@@ -523,10 +528,13 @@ export class CreateModelPage implements OnInit {
       this.inputLayer--;
     } else if (layerNumber === this.hiddenLayers.length+1) {
       this.outputLayer--;
+      
     } else {
       this.hiddenLayers[layerNumber-1]--;
-      if (this.hiddenLayers[layerNumber] === 0) {
-        this.checkRemoveLayer(layerNumber-1);
+      this.hiddenLayerBiases[layerNumber-1].pop();
+      this.hiddenLayerWeights[layerNumber-1].pop();
+      if (this.hiddenLayers[layerNumber-1] === 0) {
+        this.checkRemoveLayer(layerNumber-1); 
       }
     }
     this.redraw();
