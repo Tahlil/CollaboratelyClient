@@ -4,6 +4,7 @@ import { Data } from "../models/data.model";
 import { MachineService } from "../services/machine.service";
 import { Router } from "@angular/router";
 import { ModalController } from '@ionic/angular';
+import { UpdateDataModalPage } from "../modals/update-data-modal/update-data-modal.page";
 @Component({
   selector: 'app-manage-data',
   templateUrl: './manage-data.page.html',
@@ -32,9 +33,24 @@ export class ManageDataPage implements OnInit {
     this.router.navigate(['/', 'main', 'update-data']);
   }
 
-  openUpdateModal(){
-
+  async openUpdateModal(dataset){
+    const modal = await this.modalController.create({
+      component: UpdateDataModalPage,
+      componentProps: { 
+        dataset: dataset
+      }
+    });
+    let that= this;
+    modal.onDidDismiss().then((info) => {
+      console.log(info.data);
+      if(info.data.nodesGiven){
+        // that.addHiddenLayer(layerNumber,  info.data.numberOfNodes, info.data.activationFunction);
+      }
+    });
+    return await modal.present();
   }
+
+  
 
   
 }
