@@ -244,5 +244,52 @@
         </ion-button>
       </ion-col>
     </ion-row>
+    <ion-row>
+      <ion-col size="12" class="ion-text-center">
+        <h3 id="train">Train</h3>
+      </ion-col>
+    </ion-row>
+   <ion-row>
+    <ion-col size="8" size-md="5"  class="ion-text-center">
+      <ion-item>
+        <ion-label>Load from dataset</ion-label>
+        <ion-select value="peperoni" multiple="true" placeholder="Select dataset">
+          <ion-select-option *ngFor="let item of list" value="peperoni">Peperoni</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-col>
+    <ion-col size="4" size-md="3" class="ion-text-center">
+      <ion-button (click)="onClick()" color="medium" expand="block" fill="solid" shape="round">
+        Load
+      </ion-button>
+    </ion-col>
+    <ion-col size="6" offset="3" size-md="3" offset-md="1" class="ion-text-center">
+      <ion-button [routerLink]="['/main/mini-tabs']" routerLinkActive="router-link-active" color="success" expand="block" fill="outline" shape="round">
+        Explore dataset &nbsp; <ion-icon name="locate"></ion-icon>
+      </ion-button>
+    </ion-col>
+   </ion-row>
+    <ion-row class="ion-padding" style="border: 1px solid var(--ion-color-secondary);">
+      <ion-col size="12" size-lg="3">
+        <ion-button (click)="onClick()" class="train_btn" id="d_m" expand="block" fill="clear" size="large">
+          Train without <br> encryption
+        </ion-button>
+      </ion-col>
+      <ion-col size="12" size-lg="3">
+        <ion-button (click)="onClick()" class="train_btn" id="ed_m" expand="block" fill="clear" size="large">
+          Train with <br> encrypted data
+        </ion-button>
+      </ion-col>
+      <ion-col size="12" size-lg="3">
+        <ion-button (click)="onClick()" class="train_btn" id="d_em" expand="block" fill="clear" size="large">
+          Train with encrypted data
+        </ion-button>
+      </ion-col>
+      <ion-col size="12" size-lg="3">
+        <ion-button (click)="onClick()" class="train_btn" id="ed_em" expand="block" fill="clear" size="large">
+          Train with encrypted <br> data and model
+        </ion-button>
+      </ion-col>
+    </ion-row>
   </ion-grid>
 </ion-content>
