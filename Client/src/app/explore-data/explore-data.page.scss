@@ -1,0 +1,25 @@
+ion-toolbar{
+    margin-top: 4rem;
+}
+
+
+@media (max-width: 17em) {
+    #container{
+        margin-left: 0em !important; 
+        padding-top: 4em !important; 
+    }
+    
+ }
+@media (min-width: 42em) {
+    #container{
+        margin-left: 4em !important; 
+        padding-top: 0em !important; 
+    }
+ }
+
+ @media (min-width: 68em) {
+    #container{
+        margin-left: 16em !important;
+        padding-top: 0em !important;  
+    }
+ }

@@ -18,6 +18,13 @@
           <hr class="hr-text" data-content="Dataset List">
         </ion-col>
       </ion-row>
+      <ion-row>
+        <ion-col size="12"  size-md="4" offset-md="4">
+          <ion-button [routerLink]="['/main/explore-data']" routerLinkActive="router-link-active" color="success" expand="block" fill="solid" shape="round">
+            Explore dataset <ion-icon name="locate"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
       <ion-row style="padding-top: 11%; margin-right: 9%;" *ngIf="this.datasets.length === 0" >
         <ion-col class="ion-text-center">
           <ion-text color="light"> No Dataset Uploaded Yet.</ion-text>
@@ -54,7 +61,7 @@
             <h1><ion-icon name="lock-closed"></ion-icon> Private </h1>
           </ion-text>
           <ion-button (click)="goToUpdateData(item)" expand="block" fill="solid" shape="round" color="secondary">
-            <span>Open dataset</span>
+            <span>Update dataset</span>
           </ion-button>
           <br>
           <ion-button (click)="goToUpdateData(item)" expand="block" fill="solid" shape="round" color="primary">

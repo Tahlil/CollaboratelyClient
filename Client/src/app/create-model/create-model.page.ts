@@ -588,4 +588,8 @@ export class CreateModelPage implements OnInit {
     console.log("Change privacy.");
     this.privacy = !this.privacy;
   }
+
+  saveModel(){
+    
+  }
 }
