@@ -202,7 +202,7 @@
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col size="4" size-md="1" *ngFor="let bs of this.hiddenLayerBiases; let i = index;">
+      <ion-col size="4" size-lg="3" size-xl="2" *ngFor="let bs of this.hiddenLayerBiases; let i = index;">
         <ion-text style="border: none;" color="secondary">Hidden layer {{i+1}}</ion-text>
         <div *ngFor="let b of bs; let j = index;">
           <ion-item class="weight">
@@ -217,7 +217,7 @@
         </div>
         
       </ion-col>
-      <ion-col size="4" size-md="1">
+      <ion-col size="4" size-lg="3" size-xl="2">
         <ion-text style="border: none;" color="secondary">Output layer</ion-text>
         <div *ngFor=" let b of this.outputLayerBiases ; let i = index;">
           <ion-item class="weight">
@@ -233,12 +233,12 @@
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col size="6" size-md="3" offset-md="2">
+      <ion-col size="6"  size-lg="3" offset-lg="2">
         <ion-button (click)="newBiases()" color="tertiary"  expand="block" fill="solid" shape="round">
           Generate random bias
         </ion-button>
       </ion-col>
-      <ion-col size="6" size-md="3" offset-md="2">
+      <ion-col size="6" size-lg="3" offset-lg="2">
         <ion-button (click)="newWeights()" color="tertiary" expand="block" fill="solid" shape="round">
           Generate random weight
         </ion-button>

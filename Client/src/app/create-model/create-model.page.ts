@@ -98,12 +98,24 @@ export class CreateModelPage implements OnInit {
     console.log(this.hiddenLayerBiases);
   }
 
-  newBiases(){
-    this.loadedModel.weights = this.modelService.generateRandomWeights([this.inputLayer, ...this.hiddenLayers, this.outputLayer])
+  newWeights(){
+    console.log([this.inputLayer, ...[].concat(...this.hiddenLayers), this.outputLayer]);
+    let newWeights = this.modelService.generateRandomWeights([...[].concat(...this.hiddenLayers), this.outputLayer]);
+    for (let i = 0; i < newWeights.length-1; i++) {
+      let currentWeights = newWeights[i];    
+      this.hiddenLayerWeights[i] = currentWeights;
+    }
+    this.outputLayerWeights = newWeights[newWeights.length-1];
   }
 
-  newWeights(){
-    
+  newBiases(){
+ 
+    let newBiases = this.modelService.generateRandomBiases([...[].concat(...this.hiddenLayers), this.outputLayer]);
+    for (let i = 0; i < newBiases.length-1; i++) {
+      let currentBiases = newBiases[i];    
+      this.hiddenLayerBiases[i]= currentBiases;
+    }
+    this.outputLayerBiases = newBiases[newBiases.length-1]; 
   }
 
   async presentModal(layerNumber) {
