@@ -7,7 +7,7 @@ import {
 import { ModelService } from "../services/model.service";
 import * as d3 from "d3";
 import { ModalController } from '@ionic/angular';
-import { GetLayerModalComponent } from '../modals/get-layer-modal/get-layer-modal.component';
+import { GetLayerModalPage } from '../modals/get-layer-modal/get-layer-modal.page';
 
 
 @Component({
@@ -72,7 +72,7 @@ export class CreateModelPage implements OnInit {
 
   async presentModal(layerNumber) {
     const modal = await this.modalController.create({
-      component: GetLayerModalComponent
+      component: GetLayerModalPage
     });
     let that= this;
     modal.onDidDismiss().then((info) => {

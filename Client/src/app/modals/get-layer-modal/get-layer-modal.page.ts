@@ -1,18 +1,13 @@
 import { Component, OnInit, NgModule } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ModelService } from "../../services/model.service";
-
-import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-get-layer-modal',
-  templateUrl: './get-layer-modal.component.html',
-  styleUrls: ['./get-layer-modal.component.scss'],
+  templateUrl: './get-layer-modal.page.html',
+  styleUrls: ['./get-layer-modal.page.scss'],
 })
-@NgModule({
-  imports: [CommonModule]
-})
+export class GetLayerModalPage implements OnInit {
 
-export class GetLayerModalComponent implements OnInit {
   nodes:number;
   activationFunction:string;
 
@@ -45,5 +40,6 @@ export class GetLayerModalComponent implements OnInit {
       'activationFunction': this.activationFunction
     });
   }
+
 
 }
