@@ -7,9 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UploadDataPage implements OnInit {
 
+  fileName:string='';
   constructor() { }
 
   ngOnInit() {
+  }
+
+  fileChange(e){
+    console.log(e.target);
+    let fullPath = e.target.value.split('\\');
+    this.fileName =  fullPath[fullPath.length-1];   
   }
 
 }

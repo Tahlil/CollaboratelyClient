@@ -1,9 +1,24 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>upload-data</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
+  <ion-grid id="container">
+    <ion-row>
+      <ion-col color="primary" size="12" class="ion-text-start">
+        
+          <h1>Choose file containing dataset</h1>
+        
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12" >
+        <div class='file-input'>
+          <ion-input type="file"  (ionChange)="this.fileChange($event)" ></ion-input>
+          <span class='button'>Choose</span>
+         
+          <span style="color: dark;" class='label' *ngIf="this.fileName!==''" data-js-label>File name: <span style="font-weight: bolder; color: darkblue !important;">{{this.fileName}}</span></span>
 
+          <span class='label' *ngIf="this.fileName===''" data-js-label>No file selected</span>
+        </div>
+      </ion-col>
+    </ion-row>
+ 
+  </ion-grid>
 </ion-content>
