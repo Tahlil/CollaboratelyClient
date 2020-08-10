@@ -28,7 +28,8 @@ export class CreateModelPage implements OnInit {
   private inputLayer = 0;
   private hiddenLayers = [];
   private outputLayer = 0;
-
+  biasNodes= [];
+  weightNodes = [];
   constructor(private modelService: ModelService, public modalController: ModalController) {
     this.loadedModel = this.modelService.currentModel;
     this.graph = {
@@ -192,10 +193,21 @@ export class CreateModelPage implements OnInit {
       lastNodes[i].y += 25;
     }
     let moveX= 51, moveY=41,infoWidth=51;
-    
-
-
-    
+ 
+        for (let i = this.inputLayer; i < nodes.length; i++) {
+          let endLabel = nodes[i].label.slice(1, -1) + nodes[i].label.slice(-1) 
+          let wLabel = "W" + endLabel, bLabel = "b"+ endLabel;
+          this.biasNodes.push({
+            x: nodes[i].x+moveX-infoWidth,
+            y: nodes[i].y-moveY,
+            label: bLabel,
+          });
+          this.weightNodes.push({
+            x: nodes[i].x-moveX,
+            y: nodes[i].y-moveY,
+            label: wLabel,
+          });
+        }
     // draw links
     let link = this.svg
       .selectAll(".link")
@@ -259,10 +271,6 @@ export class CreateModelPage implements OnInit {
         return color(d.layer);
       });
 
-
-
-      
-
     let rect = lastNode
       .append("rect")
       .attr("class", "node")
@@ -280,11 +288,9 @@ export class CreateModelPage implements OnInit {
         return d.label;
       });
 
-
-      
       let index = 0;
       if (window.innerWidth > 700) {
-
+        
         var defs = this.svg.append("defs");
 
         var gradient = defs.append("linearGradient")
@@ -346,21 +352,21 @@ export class CreateModelPage implements OnInit {
 
         let wNode = this.svg
         .selectAll(".w")
-        .data(nodes)
+        .data(this.weightNodes)
         .enter()
         .append("g")
         .attr("transform", function (d) {
-          return "translate(" + (d.x+moveX-infoWidth) + "," + (d.y-moveY) + ")";
+          return "translate(" + (d.x) + "," + (d.y) + ")";
         });
   
         let bNode = this.svg
         .selectAll(".b")
-        .data(nodes)
+        .data(this.biasNodes)
         .enter()
         .append("g")
         .attr("transform", function (d) {
           
-          return "translate(" + (d.x-moveX) + "," + (d.y-moveY) + ")";
+          return "translate(" + (d.x) + "," + (d.y) + ")";
         });
 
         let weights = wNode
@@ -377,6 +383,28 @@ export class CreateModelPage implements OnInit {
       .attr("width", infoWidth)
       .attr("height", nodeSize)
       .style("fill", 'url(#g2)');
+
+
+      bNode
+      .append("text")
+      .attr("dx", "0.5em")
+      .attr("dy", "1.3em")
+      .attr("font-size", ".7em")
+      .style("fill", "white")
+      .text(function (d) {
+        return d.label;
+      });
+      
+      wNode
+      .append("text")
+      .attr("dx", "0.1em")
+      .attr("dy", "1.3em")
+      .attr("font-size", ".7em")
+      .style("fill", "white")
+      .text(function (d) {
+        return d.label;
+      });
+
       }
       
 
