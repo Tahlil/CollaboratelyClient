@@ -8,6 +8,7 @@ import { ModelService } from "../services/model.service";
 import * as d3 from "d3";
 import { ModalController } from '@ionic/angular';
 import { GetLayerModalPage } from '../modals/get-layer-modal/get-layer-modal.page';
+import { NN_Model } from '../models/nn.model';
 
 
 @Component({
@@ -17,9 +18,8 @@ import { GetLayerModalPage } from '../modals/get-layer-modal/get-layer-modal.pag
   encapsulation: ViewEncapsulation.None,
 })
 export class CreateModelPage implements OnInit {
-  loadedModel;
+  loadedModel:NN_Model;
   graph;
-
   private svg;
   private width;
   private height = 690;
@@ -28,8 +28,12 @@ export class CreateModelPage implements OnInit {
   private inputLayer = 0;
   private hiddenLayers = [];
   private outputLayer = 0;
-  biasNodes= [];
-  weightNodes = [];
+  private hiddenLayerWeights = [];
+  private hiddenLayerBiases = [];
+  private outputLayerWeights = [];
+  private outputLayerBiases = [];
+  
+
   constructor(private modelService: ModelService, public modalController: ModalController) {
     this.loadedModel = this.modelService.currentModel;
     this.graph = {
@@ -51,7 +55,7 @@ export class CreateModelPage implements OnInit {
   @HostListener("window:resize", ["$event"])
   onResize(event) {
     this.width = window.innerWidth - 111;
-    console.log(this.width);
+    //console.log(this.width);
     this.checkLeftCut();
     d3.select("svg").remove();
     this.createSvg();
@@ -67,8 +71,30 @@ export class CreateModelPage implements OnInit {
     this.hiddenLayers = layers.slice(1, layers.length - 1);
     this.outputLayer = layers[layers.length - 1];
     this.createGraph();
+    this.getAllBiasesAndWeights();
     this.createSvg();
     this.drawGraph();
+    
+  }
+
+  private getAllBiasesAndWeights(){
+    let hiddenLayerNodes = this.loadedModel.weights.length-1;
+    for (let i = 0; i < hiddenLayerNodes; i++) {
+      let currentWeights = this.loadedModel.weights[i], 
+          currentBiases = this.loadedModel.biases[i];
+        // console.log(currentBiases);
+        // console.log(currentWeights);
+        
+        
+      this.hiddenLayerWeights.push(currentWeights);
+      this.hiddenLayerBiases.push(currentBiases);    
+    }
+    this.outputLayerBiases = this.loadedModel.biases[hiddenLayerNodes]
+    this.outputLayerWeights = this.loadedModel.weights[hiddenLayerNodes]
+    console.log(this.hiddenLayerWeights);
+    console.log(this.hiddenLayerBiases);
+    
+    
   }
 
   async presentModal(layerNumber) {
@@ -77,7 +103,7 @@ export class CreateModelPage implements OnInit {
     });
     let that= this;
     modal.onDidDismiss().then((info) => {
-      console.log(info.data);
+      //console.log(info.data);
       if(info.data.nodesGiven){
         that.addHiddenLayer(layerNumber,  info.data.numberOfNodes, info.data.activationFunction);
       }
@@ -119,7 +145,7 @@ export class CreateModelPage implements OnInit {
       layerIndex++;
     }
     this.layerIndexes.push(layerIndex - 1);
-    console.log(this.graph.nodes);
+    //console.log(this.graph.nodes);
   }
 
   private createSvg(): void {
@@ -179,9 +205,9 @@ export class CreateModelPage implements OnInit {
       .filter(function (d) {
         return typeof d !== "undefined";
       });
-    console.log("Nodes: ");
+    //console.log("Nodes: ");
 
-    console.log(nodes);
+    //console.log(nodes);
     let lastNodes = [];
     for (let i = 0; i < this.layerIndexes.length; i++) {
       lastNodes.push({
@@ -192,23 +218,24 @@ export class CreateModelPage implements OnInit {
       lastNodes[i].x -= 30;
       lastNodes[i].y += 25;
     }
+    let biasNodes=[], weightNodes=[];
     let moveX= 51, moveY=41,infoWidth=51;
  
         for (let i = this.inputLayer; i < nodes.length; i++) {
           let endLabel =  nodes[i].label.slice(1, -1) + nodes[i].label.slice(-1), wLabel, bLabel;
           if(i > nodes.length-1-this.outputLayer){
-            wLabel = "W" + (this.hiddenLayers.length+1) + endLabel, bLabel = "b"+ (this.hiddenLayers.length+1) +endLabel;
+            wLabel = "W" + (this.hiddenLayers.length+1) + endLabel, bLabel = "B"+ (this.hiddenLayers.length+1) +endLabel;
           }
           else{
             wLabel = "W" + endLabel, bLabel = "b"+ endLabel;
           }
           
-          this.biasNodes.push({
+          biasNodes.push({
             x: nodes[i].x+moveX-infoWidth,
             y: nodes[i].y-moveY,
             label: bLabel,
           });
-          this.weightNodes.push({
+          weightNodes.push({
             x: nodes[i].x-moveX,
             y: nodes[i].y-moveY,
             label: wLabel,
@@ -264,8 +291,8 @@ export class CreateModelPage implements OnInit {
       .attr("transform", function (d) {
         return "translate(" + d.x + "," + d.y + ")";
       });
-      console.log(lastNode);
-      console.log(layerTitle);
+      //console.log(lastNode);
+      //console.log(layerTitle);
       
       
 
@@ -309,13 +336,13 @@ export class CreateModelPage implements OnInit {
         gradient.append("stop")
            .attr('class', 'start')
            .attr("offset", "0%")
-           .attr("stop-color", "red")
+           .attr("stop-color", "blue")
            .attr("stop-opacity", 1);
         
         gradient.append("stop")
            .attr('class', 'end')
            .attr("offset", "100%")
-           .attr("stop-color", "steelblue")
+           .attr("stop-color", "red")
            .attr("stop-opacity", 1);
         
 
@@ -358,7 +385,7 @@ export class CreateModelPage implements OnInit {
 
         let wNode = this.svg
         .selectAll(".w")
-        .data(this.weightNodes)
+        .data(weightNodes)
         .enter()
         .append("g")
         .attr("transform", function (d) {
@@ -367,7 +394,7 @@ export class CreateModelPage implements OnInit {
   
         let bNode = this.svg
         .selectAll(".b")
-        .data(this.biasNodes)
+        .data(biasNodes)
         .enter()
         .append("g")
         .attr("transform", function (d) {
@@ -432,8 +459,6 @@ export class CreateModelPage implements OnInit {
       .style("fill", "white")
 
       .text(function (d) {
-        console.log("Test...");
-        
         return d.label;
       });
 
@@ -448,7 +473,7 @@ export class CreateModelPage implements OnInit {
   }
 
   addNode(layerNumber) {
-    console.log("Layer Number: " + layerNumber);
+    //console.log("Layer Number: " + layerNumber);
     if (layerNumber === 0) {
       this.inputLayer++;
     } else if (layerNumber === this.hiddenLayers.length+1) {
@@ -465,14 +490,14 @@ export class CreateModelPage implements OnInit {
   }
 
   private removeLayer(layerNumber){
-    console.log("Removing layer " + layerNumber);
+    //console.log("Removing layer " + layerNumber);
     this.checkRemoveLayer(layerNumber-1);
     this.redraw();
   }
 
   private onActivationFunctionChange(e, index){
-    console.log(e);
-    console.log("Clicked.");
+    //console.log(e);
+    //console.log("Clicked.");
     this.loadedModel.activations[index] = e.target.value;
     this.redraw();
   }

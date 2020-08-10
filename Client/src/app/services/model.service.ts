@@ -52,11 +52,11 @@ export class ModelService {
 
   generateSmallRandomBiasAndWeights(layers){
     let weights = [], biases =[];
-    for (let i = 1; i < layers.length; i++) {
+    for (let i = 0; i < layers.length; i++) {
       const currentLayer = layers[i], currentWeights = [], currentBiases =[];
       for (let j = 0; j < currentLayer; j++) {
-        currentBiases.push(this.helper.getRandomFloat(1,11));
-        currentWeights.push(Math.random())
+        currentBiases.push(this.helper.getRandomFloat(1,11).toFixed(2));
+        currentWeights.push(Math.random().toFixed(2))
       }
       weights.push(currentWeights);
       biases.push(currentBiases); 

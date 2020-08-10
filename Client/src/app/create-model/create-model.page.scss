@@ -110,7 +110,7 @@ text {
  
  .arrow{
      position: absolute;
-     top: 19%;
+     top: 17%;
      left: 87%;
      font-size: 3rem;
      color: var(--ion-color-tertiary);
@@ -143,4 +143,22 @@ text {
 
 .w{
     color: rebeccapurple;
+}
+
+.weight{
+    border:1px solid blue;
+}
+
+.bias{
+    border:1px solid yellow;
+}
+
+.paramL{
+    font-size: small !important;
+}
+
+#wb{
+    font-weight: bold;
+    color: var(--ion-color-primary);
+    text-decoration: underline;
 }

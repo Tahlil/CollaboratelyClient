@@ -6,8 +6,8 @@ export interface NN_Model {
     optimizer: string;
     trainingMethod: string;
     layers: Array<number>;
-    biases: Array<number>;
-    weights: Array<number>;
+    biases: Array<any>;
+    weights: Array<any>;
     activations: Array<string>;
     regularization: string;
     learningRate: number;
