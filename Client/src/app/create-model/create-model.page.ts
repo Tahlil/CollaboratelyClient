@@ -8,7 +8,9 @@ import { ModelService } from "../services/model.service";
 import * as d3 from "d3";
 import { ModalController } from '@ionic/angular';
 import { GetLayerModalPage } from '../modals/get-layer-modal/get-layer-modal.page';
+import { Data } from "../models/data.model";
 import { NN_Model } from '../models/nn.model';
+import { DataService } from "../services/data.service";
 
 
 @Component({
@@ -20,6 +22,9 @@ import { NN_Model } from '../models/nn.model';
 export class CreateModelPage implements OnInit {
   loadedModel:NN_Model;
   graph;
+  datasets:Data[];
+  datasetLoaded:boolean = false;
+  loadedDataset:string="";
   private svg;
   private width;
   private height = 690;
@@ -32,10 +37,12 @@ export class CreateModelPage implements OnInit {
   private hiddenLayerBiases = [];
   private outputLayerWeights = [];
   private outputLayerBiases = [];
+  privacy:boolean=false;
   
 
-  constructor(private modelService: ModelService, public modalController: ModalController) {
+  constructor(private dataService:DataService, private modelService: ModelService, public modalController: ModalController) {
     this.loadedModel = this.modelService.currentModel;
+    this.datasets = this.dataService.loadDatasets();
     this.graph = {
       nodes: [
         // { label: "i0", layer: 1 },
@@ -64,7 +71,6 @@ export class CreateModelPage implements OnInit {
 
   ngOnInit() {
   
-    
     this.width = window.innerWidth - 111;
     this.checkLeftCut();
     this.loadedModel = this.modelService.currentModel;
@@ -564,5 +570,22 @@ export class CreateModelPage implements OnInit {
     this.loadedModel.activations.splice(layerNumber, 0, activationFunction)
     this.leftCut -= 40;
     this.redraw();
+  }
+
+  onChoosingDataset(v){
+    this.loadedDataset = v;
+  }
+
+  loadDataset(){
+    this.datasetLoaded = true;
+  }
+
+  unload(){
+    this.datasetLoaded = false;
+  }
+
+  changePrivacy(v){
+    console.log("Change privacy.");
+    this.privacy = !this.privacy;
   }
 }

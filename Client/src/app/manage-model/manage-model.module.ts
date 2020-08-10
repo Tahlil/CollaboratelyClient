@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
-
+import { ScrollbarThemeModule  } from '../directives/scrollbar.directive';
 import { ManageModelPageRoutingModule } from './manage-model-routing.module';
 
 import { ManageModelPage } from './manage-model.page';
@@ -13,7 +13,8 @@ import { ManageModelPage } from './manage-model.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    ManageModelPageRoutingModule
+    ManageModelPageRoutingModule,
+    ScrollbarThemeModule
   ],
   declarations: [ManageModelPage]
 })

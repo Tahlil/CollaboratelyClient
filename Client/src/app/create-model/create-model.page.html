@@ -1,4 +1,4 @@
-<ion-content>
+<ion-content appScrollbarTheme>
   <figure id="bar"></figure>
   <ion-grid id="options">
     <ion-row>
@@ -228,6 +228,7 @@
             <ion-label class="paramL">{{"B" + (this.hiddenLayers.length+1) + (i+1) + ":"}}</ion-label>
             <ion-input type="number" step="0.1" value="{{b}}"></ion-input>
           </ion-item>
+          <br>
         </div>
         
       </ion-col>
@@ -245,21 +246,61 @@
       </ion-col>
     </ion-row>
     <ion-row>
+      <ion-col size="12" class="ion-text-center" >
+        <h3>Choose model privacy</h3>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12" class="ion-text-center">
+        <span style="font-size: 3rem;" [ngClass]="{public: !this.privacy}"><ion-icon  name="lock-open"></ion-icon> &nbsp; Public</span>
+  <span class="ios-toggle" style="margin: 0rem 3rem;">
+    
+      <input (click)="this.changePrivacy($event.currentTarget.checked)" type="checkbox" id="cx">
+      <label for="cx"></label>
+
+   
+  </span>
+  <span style="font-size: 3rem;" [ngClass]="{private: this.privacy}"> Private &nbsp; <ion-icon  name="lock-closed"></ion-icon></span> 
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        <ion-button id="save" (click)="onClick()"  size="large" expand="block" fill="solid" shape="round">
+          Save model &nbsp; <ion-icon name="save"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
       <ion-col size="12" class="ion-text-center">
         <h3 id="train">Train</h3>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12" class="ion-text-center">
+        <ion-text class="no-border"  color="light" *ngIf="!this.datasetLoaded">
+          <h3>No data set loaded</h3>
+          
+        </ion-text>
+        <ion-text class="no-border" color="tertiary" *ngIf="this.datasetLoaded">
+          Dataset loaded: <h1> {{loadedDataset}}</h1>
+          <ion-button id="unload" (click)="unload()" color="light" expand="block" fill="outline" shape="round" >
+            Unload
+          </ion-button>
+        </ion-text>
+        
       </ion-col>
     </ion-row>
    <ion-row>
     <ion-col size="8" size-md="5"  class="ion-text-center">
       <ion-item>
         <ion-label>Load from dataset</ion-label>
-        <ion-select value="peperoni" multiple="true" placeholder="Select dataset">
-          <ion-select-option *ngFor="let item of list" value="peperoni">Peperoni</ion-select-option>
+        <ion-select id="dataset" (ionChange) = "this.onChoosingDataset($event.target.value)" placeholder="Select dataset">
+          <ion-select-option *ngFor="let dataset of this.datasets" value="{{dataset.datasetName}}">{{dataset.datasetName}}</ion-select-option>
         </ion-select>
       </ion-item>
     </ion-col>
     <ion-col size="4" size-md="3" class="ion-text-center">
-      <ion-button (click)="onClick()" color="medium" expand="block" fill="solid" shape="round">
+      <ion-button (click)="loadDataset()" color="medium" expand="block" fill="solid" shape="round" disabled="{{this.loadedDataset === '' || this.datasetLoaded }}">
         Load
       </ion-button>
     </ion-col>
@@ -282,7 +323,7 @@
       </ion-col>
       <ion-col size="12" size-lg="3">
         <ion-button (click)="onClick()" class="train_btn" id="d_em" expand="block" fill="clear" size="large">
-          Train with encrypted data
+          Train with <br> encrypted data
         </ion-button>
       </ion-col>
       <ion-col size="12" size-lg="3">
