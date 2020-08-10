@@ -93,7 +93,13 @@ export class CreateModelPage implements OnInit {
     this.outputLayerWeights = this.loadedModel.weights[hiddenLayerNodes]
     console.log(this.hiddenLayerWeights);
     console.log(this.hiddenLayerBiases);
-    
+  }
+
+  newBiases(){
+    this.loadedModel.weights = this.modelService.generateRandomWeights([this.inputLayer, ...this.hiddenLayers, this.outputLayer])
+  }
+
+  newWeights(){
     
   }
 
@@ -478,8 +484,12 @@ export class CreateModelPage implements OnInit {
       this.inputLayer++;
     } else if (layerNumber === this.hiddenLayers.length+1) {
       this.outputLayer++;
+      this.outputLayerBiases.push(0.0)
+      this.outputLayerWeights.push(1.0)
     } else {
       this.hiddenLayers[layerNumber-1]++;
+      this.hiddenLayerBiases[layerNumber-1].push(0.0)
+      this.hiddenLayerWeights[layerNumber-1].push(1.0)
     }
     this.redraw();
   }

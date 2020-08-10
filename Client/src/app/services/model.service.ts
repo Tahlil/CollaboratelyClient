@@ -50,19 +50,33 @@ export class ModelService {
     return model;
   }
 
-  generateSmallRandomBiasAndWeights(layers){
-    let weights = [], biases =[];
+  private generateSmallRandomBiasAndWeights(layers){
+    let weights = this.generateRandomWeights(layers), biases =this.generateRandomBiases(layers);
+    return {weights:weights, biases:biases}
+  }
+
+  generateRandomBiases(layers){
+    let  biases =[];
     for (let i = 0; i < layers.length; i++) {
-      const currentLayer = layers[i], currentWeights = [], currentBiases =[];
+      const currentLayer = layers[i], currentBiases =[];
       for (let j = 0; j < currentLayer; j++) {
         currentBiases.push(this.helper.getRandomFloat(1,11).toFixed(2));
-        currentWeights.push(Math.random().toFixed(2))
-      }
-      weights.push(currentWeights);
+      } 
       biases.push(currentBiases); 
     }
-    
-    return {weights:weights, biases:biases}
+    return biases;
+  }
+
+  generateRandomWeights(layers){
+    let weights= [];
+    for (let i = 0; i < layers.length; i++) {
+      const currentLayer = layers[i], currentWeights = [];
+      for (let j = 0; j < currentLayer; j++) {
+        currentWeights.push(Math.random().toFixed(2))
+      }
+      weights.push(currentWeights);  
+    }
+    return weights;
   }
 
   private getLatestID(){
