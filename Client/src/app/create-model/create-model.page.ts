@@ -191,6 +191,9 @@ export class CreateModelPage implements OnInit {
       lastNodes[i].x -= 30;
       lastNodes[i].y += 25;
     }
+    let moveX= 51, moveY=41,infoWidth=51;
+    
+
 
     
     // draw links
@@ -256,6 +259,10 @@ export class CreateModelPage implements OnInit {
         return color(d.layer);
       });
 
+
+
+      
+
     let rect = lastNode
       .append("rect")
       .attr("class", "node")
@@ -277,6 +284,48 @@ export class CreateModelPage implements OnInit {
       
       let index = 0;
       if (window.innerWidth > 700) {
+
+        var defs = this.svg.append("defs");
+
+        var gradient = defs.append("linearGradient")
+           .attr("id", "svgGradient")
+           .attr("x1", "0%")
+           .attr("x2", "100%")
+           .attr("y1", "0%")
+           .attr("y2", "100%");
+        
+        gradient.append("stop")
+           .attr('class', 'start')
+           .attr("offset", "0%")
+           .attr("stop-color", "red")
+           .attr("stop-opacity", 1);
+        
+        gradient.append("stop")
+           .attr('class', 'end')
+           .attr("offset", "100%")
+           .attr("stop-color", "steelblue")
+           .attr("stop-opacity", 1);
+        
+
+           gradient = defs.append("linearGradient")
+           .attr("id", "g2")
+           .attr("x1", "0%")
+           .attr("x2", "100%")
+           .attr("y1", "0%")
+           .attr("y2", "100%");
+        
+        gradient.append("stop")
+           .attr('class', 'start')
+           .attr("offset", "0%")
+           .attr("stop-color", "yellow")
+           .attr("stop-opacity", 1);
+        
+        gradient.append("stop")
+           .attr('class', 'end')
+           .attr("offset", "100%")
+           .attr("stop-color", "grey")
+           .attr("stop-opacity", 1);
+
         layerTitle
      
         .append("text")
@@ -292,7 +341,42 @@ export class CreateModelPage implements OnInit {
           else output= "Hidden Layer " + index;
           index++
           return output;
-        });  
+        }); 
+        
+
+        let wNode = this.svg
+        .selectAll(".w")
+        .data(nodes)
+        .enter()
+        .append("g")
+        .attr("transform", function (d) {
+          return "translate(" + (d.x+moveX-infoWidth) + "," + (d.y-moveY) + ")";
+        });
+  
+        let bNode = this.svg
+        .selectAll(".b")
+        .data(nodes)
+        .enter()
+        .append("g")
+        .attr("transform", function (d) {
+          
+          return "translate(" + (d.x-moveX) + "," + (d.y-moveY) + ")";
+        });
+
+        let weights = wNode
+      .append("rect")
+      .attr("class", "w")
+      .attr("width", infoWidth)
+      .attr("height", nodeSize)
+      .style("fill", "url(#svgGradient)");
+      
+      
+      let biases = bNode
+      .append("rect")
+      .attr("class", "b")
+      .attr("width", infoWidth)
+      .attr("height", nodeSize)
+      .style("fill", 'url(#g2)');
       }
       
 
