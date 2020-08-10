@@ -74,9 +74,12 @@ export class CreateModelPage implements OnInit {
     const modal = await this.modalController.create({
       component: GetLayerModalComponent
     });
+    let that= this;
     modal.onDidDismiss().then((info) => {
       console.log(info.data);
-      ;
+      if(info.data.nodesGiven){
+        that.addHiddenLayer(layerNumber,  info.data.numberOfNodes, info.data.activationFunction);
+      }
     });
     return await modal.present();
     
@@ -188,15 +191,6 @@ export class CreateModelPage implements OnInit {
       lastNodes[i].x -= 30;
       lastNodes[i].y += 25;
     }
-
-    let everyLayers= [{
-      x: nodes[0].x,
-      y: nodes[0].y,
-      label: "none",
-      layer: 0}, ...lastNodes.map((x, index) => {
-        return {...x, layer:index+1};
-       }
-      )]
 
     
     // draw links
@@ -385,7 +379,10 @@ export class CreateModelPage implements OnInit {
     this.redraw();
   }
 
-  addHiddenLayer(){
-
+  addHiddenLayer(layerNumber, numberOfNodes, activationFunction){
+    this.hiddenLayers.splice(layerNumber, 0, numberOfNodes);
+    this.loadedModel.activations.splice(layerNumber, 0, activationFunction)
+    this.leftCut -= 40;
+    this.redraw();
   }
 }
