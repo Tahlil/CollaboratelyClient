@@ -100,21 +100,21 @@ export class CreateModelPage implements OnInit {
     this.graph.nodes = [];
     let totalLayers = this.hiddenLayers.length+1;
     for (let i = 0; i < this.inputLayer; i++) {
-      const curLabel = "i" + i;
+      const curLabel = "I" + (i+1);
       this.graph.nodes.push({ label: curLabel, layer: 1 });
       layerIndex++;
     }
     for (let i = 0; i < this.hiddenLayers.length; i++) {
       let hiddenLayer = this.hiddenLayers[i];
       for (let j = 0; j < hiddenLayer; j++) {
-        const curLabel = "h" + (i+1).toString() + j.toString();
+        const curLabel = "h" + (i+1).toString() + (j+1).toString();
         this.graph.nodes.push({ label: curLabel, layer: i + 2 });
         layerIndex++;
       }
       this.layerIndexes.push(layerIndex - 1);
     }
     for (let i = 0; i < this.outputLayer; i++) {
-      const curLabel = "o" + i;
+      const curLabel = "O" + (i+1);
       this.graph.nodes.push({ label: curLabel, layer: totalLayers+1 });
       layerIndex++;
     }
@@ -195,8 +195,14 @@ export class CreateModelPage implements OnInit {
     let moveX= 51, moveY=41,infoWidth=51;
  
         for (let i = this.inputLayer; i < nodes.length; i++) {
-          let endLabel = nodes[i].label.slice(1, -1) + nodes[i].label.slice(-1) 
-          let wLabel = "W" + endLabel, bLabel = "b"+ endLabel;
+          let endLabel =  nodes[i].label.slice(1, -1) + nodes[i].label.slice(-1), wLabel, bLabel;
+          if(i > nodes.length-1-this.outputLayer){
+            wLabel = "W" + (this.hiddenLayers.length+1) + endLabel, bLabel = "b"+ (this.hiddenLayers.length+1) +endLabel;
+          }
+          else{
+            wLabel = "W" + endLabel, bLabel = "b"+ endLabel;
+          }
+          
           this.biasNodes.push({
             x: nodes[i].x+moveX-infoWidth,
             y: nodes[i].y-moveY,
@@ -283,7 +289,7 @@ export class CreateModelPage implements OnInit {
       .append("text")
       .attr("dx", "-.35em")
       .attr("dy", ".35em")
-      .attr("font-size", ".6em")
+      .attr("font-size", ".7em")
       .text(function (d) {
         return d.label;
       });

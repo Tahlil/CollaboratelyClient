@@ -31,6 +31,7 @@ export class ModelService {
     for (let i=0; i<layers.length; i++) {
       activationFunctions.push(this.activationFunctions[this.helper.getRandomInt(0, this.activationFunctions.length)])
     }
+    let weightsAndBiases = this.generateSmallRandomBiasAndWeights(layers);
     const model: NN_Model = {
       id: this.getLatestID(),
       isEncrypted: Math.random() < 0.5 ? true : false,
@@ -39,8 +40,8 @@ export class ModelService {
       optimizer: "none",
       trainingMethod: this.trainingMethods[this.helper.getRandomInt(0, this.trainingMethods.length)],
       layers: [numberOfFeatures, ...layers],
-      biases: [],
-      weights: [],
+      biases: weightsAndBiases.biases,
+      weights: weightsAndBiases.weights,
       activations: activationFunctions,
       regularization: this.regularizationOptions[this.helper.getRandomInt(0,3)],
       learningRate: Math.random(),
@@ -51,7 +52,7 @@ export class ModelService {
 
   generateSmallRandomBiasAndWeights(layers){
     let weights = [], biases =[];
-    for (let i = 0; i < layers.length; i++) {
+    for (let i = 1; i < layers.length; i++) {
       const currentLayer = layers[i], currentWeights = [], currentBiases =[];
       for (let j = 0; j < currentLayer; j++) {
         currentBiases.push(this.helper.getRandomFloat(1,11));
