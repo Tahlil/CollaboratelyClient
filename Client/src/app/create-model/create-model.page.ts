@@ -542,6 +542,13 @@ export class CreateModelPage implements OnInit {
 
   addHiddenLayer(layerNumber, numberOfNodes, activationFunction){
     this.hiddenLayers.splice(layerNumber, 0, numberOfNodes);
+    let weights=[], biases=[];
+    for (let i = 0; i < numberOfNodes; i++) {
+      weights.push(1.0);
+      biases.push(0.0);
+    }
+    this.hiddenLayerWeights.splice(layerNumber, 0, weights);
+    this.hiddenLayerBiases.splice(layerNumber, 0, biases);
     this.loadedModel.activations.splice(layerNumber, 0, activationFunction)
     this.leftCut -= 40;
     this.redraw();
