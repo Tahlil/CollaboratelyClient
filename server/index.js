@@ -13,16 +13,28 @@ async function getCPUAndGPUData() {
     try {
         const cpuData = await si.cpu();
         const memData = await si.mem();
-        const diskData = await si.diskLayout();
+        const diskData = await si.diskLayout(); 
+
+        const hardwareInfo = await si.system();
+        const osInfo = await si.osInfo();
+
 
         machineData['cpu'] = {};
         machineData['gpu'] = {};
+        machineData['manufacturer'] = hardwareInfo.manufacturer;
+        machineData['model'] = hardwareInfo.model;
+        machineData['version'] = hardwareInfo.version;
+        machineData['osType'] = osInfo.platform;
+        machineData['osVersion'] = osInfo.distro +", " + osInfo.release;
+        machineData['architecture'] = osInfo.arch;
+
         machineData.cpu['Manufacturer'] = cpuData.manufacturer;
         machineData.cpu['Brand'] = cpuData.brand;
         machineData.cpu['Speed'] = cpuData.speed + ' GHz';
         machineData.cpu['Cores'] = cpuData.cores;
         machineData.cpu['Physical Cores'] = cpuData.physicalCores;
-        machineData.cpu['RAM'] = (memData.total/1000000000).toFixed(2) + " GB";
+        machineData.cpu['RAM'] = (memData.total/1000000000).toFixed(2) + 
+        " GB";
         console.log(diskData);
         const gpuData = (await si.graphics()).controllers;
        
