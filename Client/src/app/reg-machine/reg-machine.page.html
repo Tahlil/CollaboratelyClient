@@ -1,4 +1,4 @@
-<ion-content>
+<ion-content appScrollbarTheme>
   <div *ngIf="!this.verifiedMachine"  class="fullheight xc">
     <div>
       <ion-row class="ion-text-center">
@@ -26,6 +26,46 @@
         <ion-row class="ion-text-center">
           <ion-col size="12"> <ion-icon id="machine" name="laptop-outline"></ion-icon></ion-col>
         </ion-row>
+
+        
+        <ion-row>
+          <ion-col size="12">
+            <div class="table-wrapper">
+              <h1 class="table-spanner" id="table-header">
+                <span>Machine Details</span>
+              </h1>
+              <div class="table" role="table" aria-labelledby="table-header">         
+                <div class="tbody" role="rowgroup">
+                  <div class="tr" role="row" *ngFor="let item of this.machineService.getHardwareInfo() | keyvalue">
+                    <div data="Roman Name" class="td" role="cell">{{item.key}}</div>
+                    <div data="Greek Name" class="td" role="cell">{{item.value}}</div>
+                  </div>      
+                </div>
+              </div>
+            </div>
+          </ion-col>
+        </ion-row>
+
+        
+        <ion-row>
+          <ion-col size="12">
+            <div class="table-wrapper">
+              <h1 class="table-spanner" id="table-header">
+                <span>OS Details</span>
+              </h1>
+              <div class="table" role="table" aria-labelledby="table-header">         
+                <div class="tbody" role="rowgroup">
+                  <div class="tr" role="row" *ngFor="let item of this.machineService.getOSInfo() | keyvalue">
+                    <div data="Roman Name" class="td" role="cell">{{item.key}}</div>
+                    <div data="Greek Name" class="td" role="cell">{{item.value}}</div>
+                  </div>      
+                </div>
+              </div>
+            </div>
+          </ion-col>
+        </ion-row>
+
+
         <ion-row>
           <ion-col size="12">
             <div class="table-wrapper">

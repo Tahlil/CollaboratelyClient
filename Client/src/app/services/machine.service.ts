@@ -31,4 +31,22 @@ export class MachineService {
     return this.deviceInfo.gpu; 
   }
 
+  getHardwareInfo(){
+    return {
+      "Manufacturer": this.deviceInfo.manufacturer,
+      "Model": this.deviceInfo.model,
+      "Version": this.deviceInfo.version
+    };
+  }
+
+  getOSInfo(){
+    return {
+      
+      "OS Type": this.deviceInfo.osType,
+      "OS version": this.deviceInfo.osVersion,
+      "Architecture": this.deviceInfo.architecture
+    };
+
+  }
+
 }

@@ -35,7 +35,8 @@ async function getCPUAndGPUData() {
         machineData.cpu['Physical Cores'] = cpuData.physicalCores;
         machineData.cpu['RAM'] = (memData.total/1000000000).toFixed(2) + 
         " GB";
-        console.log(diskData);
+        // console.log(diskData);
+        console.log(hardwareInfo.version);
         const gpuData = (await si.graphics()).controllers;
        
         machineData.cpu['storage'], allStorageData = "", "";
