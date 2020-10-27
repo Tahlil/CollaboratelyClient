@@ -11,6 +11,6 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
-    "systeminformation": "^4.26.10"
+    "systeminformation": "^4.27.11"
   }
 }
